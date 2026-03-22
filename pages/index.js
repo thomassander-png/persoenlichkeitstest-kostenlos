@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Head from "next/head";
+import Script from "next/script";
 
 const TESTS = [
   { id: "persoenlichkeit", name: "Persönlichkeitstest", emoji: "🧠", desc: "16 Typen — Wer bist du wirklich?", color: "#00E5FF", questions: 12, time: "3 Min", hot: true },
@@ -147,6 +148,20 @@ export default function Home() {
 
   return (
     <>
+      {/* Google Analytics 4 */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-EJ938L3HJR"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EJ938L3HJR');
+        `}
+      </Script>
+
       <Head>
         <title>Kostenloser Persönlichkeitstest 2026 | KI-gestützte Analyse</title>
         <meta name="description" content="Entdecke deinen Persönlichkeitstyp mit unserem kostenlosen KI-Persönlichkeitstest. 16 Typen, 12 Fragen, sofortiges Ergebnis. Kein Account nötig." />
@@ -160,7 +175,7 @@ export default function Home() {
         <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: "1px solid #1A2040" }}>
           <div onClick={goHome} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ fontSize: 16, fontWeight: 900, color: "#00E5FF" }}>⚡</span>
-            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>PERSÖNLICHKEITSTEST</span>
+            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>FINDUR.APP</span>
           </div>
           <span style={{ fontSize: 9, color: "#00E5FF", background: "#00E5FF15", padding: "3px 8px", borderRadius: 4, fontWeight: 700 }}>KOSTENLOS</span>
         </nav>
@@ -172,8 +187,9 @@ export default function Home() {
               <div style={{ fontSize: 11, letterSpacing: 5, color: "#7A84A8", marginBottom: 8 }}>KI-GESTÜTZTE ANALYSE</div>
               <h1 style={{ fontSize: 32, fontWeight: 900, margin: "0 0 8px", lineHeight: 1.1, background: "linear-gradient(135deg, #00E5FF 0%, #A855F7 50%, #FF0099 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Wer bist du wirklich?</h1>
               <p style={{ fontSize: 14, color: "#7A84A8", maxWidth: 400, margin: "0 auto 20px" }}>Kostenlose Persönlichkeitstests — wissenschaftlich fundiert, KI-analysiert, sofort Ergebnis.</p>
-              <button onClick={() => startTest("persoenlichkeit")} style={{ background: "linear-gradient(135deg, #00E5FF, #A855F7)", color: "#fff", border: "none", borderRadius: 50, padding: "14px 36px", fontSize: 15, fontWeight: 700, cursor: "pointer", letterSpacing: 1 }}>JETZT TESTEN →</button>
-              <div style={{ fontSize: 11, color: "#7A84A8", marginTop: 10 }}>Kein Account nötig · 100% kostenlos · 2-3 Minuten</div>
+              <button onClick={() => startTest("persoenlichkeit")} style={{ background: "linear-gradient(135deg, #00E5FF, #A855F7)", color: "#000", fontWeight: 800, fontSize: 14, padding: "14px 32px", borderRadius: 50, border: "none", cursor: "pointer", letterSpacing: 0.5 }}>
+                Jetzt starten →
+              </button>
             </div>
             <div style={{ padding: "0 16px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
@@ -210,8 +226,13 @@ export default function Home() {
               <h2 style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Kostenloser Persönlichkeitstest 2026</h2>
               <p style={{ fontSize: 11, color: "#7A84A8", lineHeight: 1.6 }}>Entdecke deinen Persönlichkeitstyp mit unserem kostenlosen KI-gestützten Persönlichkeitstest. Basierend auf den 16 Persönlichkeitstypen analysiert unser Test deine Stärken, Schwächen und versteckten Eigenschaften. Über 12 wissenschaftlich fundierte Fragen erfährst du, ob du ein Architekt, Mediator, Entertainer oder einer der 13 anderen Typen bist. Kein Account nötig, 100% kostenlos, sofortiges Ergebnis.</p>
             </div>
+            {/* Footer */}
             <div style={{ padding: "16px", textAlign: "center", borderTop: "1px solid #1A2040" }}>
-              <div style={{ fontSize: 10, color: "#7A84A8" }}>© 2026 persoenlichkeitstest-kostenlos.de</div>
+              <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 8 }}>
+                <a href="/impressum" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Impressum</a>
+                <a href="/datenschutz" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Datenschutz</a>
+              </div>
+              <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · findur.app</div>
             </div>
           </div>
         )}
