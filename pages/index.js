@@ -162,6 +162,14 @@ export default function Home() {
         `}
       </Script>
 
+      {/* Google AdSense */}
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5239592989987247"
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      />
+
       <Head>
         <title>Kostenloser Persönlichkeitstest 2026 | KI-gestützte Analyse</title>
         <meta name="description" content="Entdecke deinen Persönlichkeitstyp mit unserem kostenlosen KI-Persönlichkeitstest. 16 Typen, 12 Fragen, sofortiges Ergebnis. Kein Account nötig." />
