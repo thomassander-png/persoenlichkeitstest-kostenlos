@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Script from "next/script";
 
@@ -581,6 +582,25 @@ export default function Home() {
   const [answers, setAnswers] = useState([]);
   const [selected, setSelected] = useState(null);
   const [resultData, setResultData] = useState(null);
+
+  const router = useRouter();
+
+  // Auto-start test from URL parameter (?test=rizz etc.)
+  useEffect(() => {
+    if (router.isReady && router.query.test) {
+      const tid = router.query.test;
+      const validTests = ["persoenlichkeit", "rizz", "aura", "brainrot", "dark", "npc", "toxicity", "redflag"];
+      if (validTests.includes(tid)) {
+        setTestId(tid);
+        setPage("test");
+        setCurrent(0);
+        setScores({});
+        setAnswers([]);
+        setSelected(null);
+        setResultData(null);
+      }
+    }
+  }, [router.isReady, router.query.test]);
 
   const startTest = (id) => { setTestId(id); setPage("test"); setCurrent(0); setScores({}); setAnswers([]); setSelected(null); setResultData(null); };
   const goHome = () => { setPage("home"); setTestId(null); setResultData(null); };
