@@ -353,6 +353,9 @@ function ContentGenerator() {
   const [optimizeResult, setOptimizeResult] = useState(null);
   const [optimizeError, setOptimizeError] = useState(null);
   const [optimizeInput, setOptimizeInput] = useState({hook:"",frage:"",antworten:["","","",""],ergebnis:"",cta:""});
+  const [slideGenerated, setSlideGenerated] = useState(null);
+  const [slideLoading, setSlideLoading] = useState(false);
+  const [slideTest, setSlideTest] = useState(TESTS[0]);
 
   const generate = () => {
     const hook = selectedTest.hooks[Math.floor(Math.random()*selectedTest.hooks.length)];
@@ -455,6 +458,191 @@ function ContentGenerator() {
     setTab("optimize");
   };
 
+  // Canvas Slide Generator
+  const generateSlides = async (testOverride, generatedOverride) => {
+    const t = testOverride || slideTest;
+    const g = generatedOverride || {
+      hook: t.hooks[Math.floor(Math.random()*t.hooks.length)],
+      frage: t.fragen[Math.floor(Math.random()*t.fragen.length)],
+      ergebnis: t.ergebnisse[Math.floor(Math.random()*t.ergebnisse.length)],
+    };
+    setSlideLoading(true);
+    setSlideGenerated(null);
+    await new Promise(r => setTimeout(r, 50));
+
+    const W = 1080, H = 1920;
+    const slides = [];
+
+    const drawSlide = (drawFn) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      // Background
+      ctx.fillStyle = '#0a0e1a';
+      ctx.fillRect(0, 0, W, H);
+      // Decorative triangles
+      const tris = [
+        {x:120,y:180,s:28,c:'#8B0000'},{x:680,y:120,s:20,c:'#8B0000'},
+        {x:900,y:400,s:16,c:'#8B0000'},{x:200,y:1600,s:22,c:'#8B0000'},
+        {x:800,y:1750,s:18,c:'#8B0000'},{x:50,y:900,s:14,c:'#8B0000'},
+        {x:1020,y:700,s:12,c:'#8B0000'},{x:500,y:1850,s:24,c:'#8B0000'},
+      ];
+      tris.forEach(({x,y,s,c}) => {
+        ctx.beginPath();
+        ctx.moveTo(x, y-s); ctx.lineTo(x+s*0.87, y+s*0.5); ctx.lineTo(x-s*0.87, y+s*0.5);
+        ctx.closePath(); ctx.fillStyle = c; ctx.fill();
+      });
+      // Subtle gradient overlay
+      const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W*0.8);
+      grad.addColorStop(0, 'rgba(20,10,40,0.3)');
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+      drawFn(ctx, W, H);
+      return canvas.toDataURL('image/png');
+    };
+
+    const roundRect = (ctx, x, y, w, h, r) => {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    };
+
+    const wrapText = (ctx, text, x, y, maxW, lineH) => {
+      const words = text.split(' ');
+      let line = '';
+      let lines = [];
+      for (let w of words) {
+        const test = line + w + ' ';
+        if (ctx.measureText(test).width > maxW && line !== '') {
+          lines.push(line.trim()); line = w + ' ';
+        } else { line = test; }
+      }
+      lines.push(line.trim());
+      lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineH));
+      return lines.length;
+    };
+
+    // SLIDE 1: Hook
+    slides.push(drawSlide((ctx, W, H) => {
+      // Top label
+      ctx.font = 'bold 36px Arial';
+      ctx.fillStyle = t.color;
+      ctx.textAlign = 'center';
+      ctx.fillText(t.emoji + ' ' + t.name.toUpperCase(), W/2, 280);
+      // Hook text — split at keyword
+      const hookWords = g.hook.split(' ');
+      const midIdx = Math.ceil(hookWords.length / 2);
+      const line1 = hookWords.slice(0, midIdx).join(' ');
+      const line2 = hookWords.slice(midIdx).join(' ');
+      ctx.font = 'bold 96px Arial';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(line1, W/2, H/2 - 80);
+      ctx.font = 'bold 96px Arial';
+      ctx.fillStyle = t.color;
+      ctx.fillText(line2, W/2, H/2 + 40);
+      // Subline
+      ctx.font = '52px Arial';
+      ctx.fillStyle = '#FFB800';
+      ctx.fillText('Die meisten wissen es nicht...', W/2, H/2 + 180);
+      // Bottom URL
+      ctx.font = 'bold 38px Arial';
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillText('persoenlichkeitstest-kostenlos.de', W/2, H - 200);
+    }));
+
+    // SLIDE 2: Frage
+    slides.push(drawSlide((ctx, W, H) => {
+      ctx.font = 'bold 40px Arial';
+      ctx.fillStyle = t.color;
+      ctx.textAlign = 'center';
+      ctx.fillText('FRAGE:', W/2, 280);
+      ctx.font = 'bold 72px Arial';
+      ctx.fillStyle = '#ffffff';
+      const lines = wrapText(ctx, g.frage.q, W/2, H/2 - 280, W - 120, 90);
+      // Answers
+      g.frage.a.forEach((ans, i) => {
+        const ay = H/2 + 80 + i * 160;
+        ctx.fillStyle = i === 0 ? t.color + '30' : 'rgba(255,255,255,0.05)';
+        roundRect(ctx, 80, ay - 55, W - 160, 120, 20);
+        ctx.fill();
+        ctx.strokeStyle = i === 0 ? t.color : 'rgba(255,255,255,0.1)';
+        ctx.lineWidth = 2;
+        roundRect(ctx, 80, ay - 55, W - 160, 120, 20);
+        ctx.stroke();
+        ctx.font = 'bold 52px Arial';
+        ctx.fillStyle = i === 0 ? t.color : '#D8DDF0';
+        ctx.textAlign = 'center';
+        ctx.fillText(ans, W/2, ay + 15);
+      });
+    }));
+
+    // SLIDE 3: Ergebnis
+    slides.push(drawSlide((ctx, W, H) => {
+      ctx.font = 'bold 44px Arial';
+      ctx.fillStyle = t.color;
+      ctx.textAlign = 'center';
+      ctx.fillText('DEIN ERGEBNIS:', W/2, 280);
+      // Big result type
+      ctx.font = 'bold 160px Arial';
+      ctx.fillStyle = t.color;
+      ctx.fillText(g.ergebnis.typ, W/2, H/2 - 60);
+      // Name
+      ctx.font = 'bold 80px Arial';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(g.ergebnis.name, W/2, H/2 + 80);
+      // Percentage
+      ctx.font = '52px Arial';
+      ctx.fillStyle = '#FFB800';
+      ctx.fillText('Nur ' + g.ergebnis.pct + ' der Menschen', W/2, H/2 + 200);
+      // Desc
+      ctx.font = '48px Arial';
+      ctx.fillStyle = 'rgba(216,221,240,0.8)';
+      wrapText(ctx, g.ergebnis.desc, W/2, H/2 + 340, W - 160, 65);
+    }));
+
+    // SLIDE 4: CTA
+    slides.push(drawSlide((ctx, W, H) => {
+      ctx.font = 'bold 52px Arial';
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.fillText('Welcher Typ bist', W/2, H/2 - 200);
+      ctx.font = 'bold 120px Arial';
+      ctx.fillStyle = t.color;
+      ctx.fillText('DU?', W/2, H/2 - 60);
+      ctx.font = '52px Arial';
+      ctx.fillStyle = '#FFB800';
+      ctx.fillText('👇 Link in der Bio', W/2, H/2 + 100);
+      // URL box
+      ctx.fillStyle = 'rgba(255,255,255,0.08)';
+      roundRect(ctx, 80, H/2 + 200, W - 160, 120, 20);
+      ctx.fill();
+      ctx.font = 'bold 44px Arial';
+      ctx.fillStyle = t.color;
+      ctx.fillText('persoenlichkeitstest-kostenlos.de' + t.path, W/2, H/2 + 278);
+    }));
+
+    setSlideGenerated({slides, test: t, generated: g});
+    setSlideLoading(false);
+  };
+
+  const downloadSlide = (dataUrl, index, testName) => {
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = `slide_${testName.replace(/\s/g,'_')}_${index+1}.png`;
+    a.click();
+  };
+
+  const downloadAllSlides = () => {
+    if (!slideGenerated) return;
+    slideGenerated.slides.forEach((s, i) => {
+      setTimeout(() => downloadSlide(s, i, slideGenerated.test.name), i * 300);
+    });
+  };
+
   const getScriptForTest = (testId) => {
     const scripts = SCRIPTS[testId];
     if (!scripts) return null;
@@ -476,7 +664,7 @@ function ContentGenerator() {
 
       {/* Tabs */}
       <div style={{display:"flex",gap:4,marginBottom:16,overflowX:"auto"}}>
-        {[{id:"generate",label:"⚡ Generator"},{id:"batch",label:"📦 Batch"},{id:"optimize",label:"🔥 Optimieren"},{id:"script",label:"🎬 Script"},{id:"trends",label:"📈 Trends"},{id:"calendar",label:"📅 Plan"}].map(t=>(
+        {[{id:"generate",label:"⚡ Generator"},{id:"batch",label:"📦 Batch"},{id:"slides",label:"📸 Slides"},{id:"optimize",label:"🔥 Optimieren"},{id:"script",label:"🎬 Script"},{id:"trends",label:"📈 Trends"},{id:"calendar",label:"📅 Plan"}].map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)} style={{
             flexShrink:0,background:tab===t.id?"rgba(0,229,255,0.15)":"rgba(22,28,53,0.7)",
             border:`1px solid ${tab===t.id?"#00E5FF":"#1A2040"}`,borderRadius:8,padding:"8px 10px",
@@ -590,6 +778,70 @@ function ContentGenerator() {
                 border:`1px solid ${copied==="caption"?"#00FF88":"#1A2040"}`,borderRadius:8,
                 padding:"10px",fontSize:12,color:copied==="caption"?"#00FF88":"#00E5FF",cursor:"pointer",fontWeight:700
               }}>{copied==="caption"?"✅ Kopiert!":"📋 Caption kopieren"}</button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* SLIDES TAB */}
+      {tab==="slides" && (
+        <div>
+          <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:8}}>📸 TIKTOK SLIDE GENERATOR</div>
+          <div style={{fontSize:10,color:"#7A84A8",marginBottom:12}}>Fertige 9:16 PNG-Slides zum direkten Upload auf TikTok & Instagram</div>
+          
+          {/* Test auswählen */}
+          <div style={{fontSize:10,color:"#7A84A8",marginBottom:6}}>TEST AUSWÄHLEN:</div>
+          <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:12}}>
+            {TESTS.map(t=>(
+              <button key={t.id} onClick={()=>setSlideTest(t)} style={{
+                background:slideTest.id===t.id?`${t.color}20`:"rgba(22,28,53,0.7)",
+                border:`1px solid ${slideTest.id===t.id?t.color:"#1A2040"}`,
+                borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:10,
+                color:slideTest.id===t.id?t.color:"#7A84A8",fontWeight:600
+              }}>{t.emoji} {t.name}</button>
+            ))}
+          </div>
+
+          <button onClick={()=>generateSlides()} disabled={slideLoading} style={{
+            width:"100%",background:slideLoading?"rgba(22,28,53,0.7)":"linear-gradient(135deg,#A855F7,#FF0099)",
+            color:"#fff",border:"none",borderRadius:12,padding:"14px",fontSize:14,fontWeight:700,
+            cursor:slideLoading?"not-allowed":"pointer",marginBottom:16,opacity:slideLoading?0.7:1
+          }}>{slideLoading?"⏳ Slides werden erstellt...":"📸 Slides generieren"}</button>
+
+          {generated && tab==="slides" && (
+            <button onClick={()=>generateSlides(generated.test, generated)} style={{
+              width:"100%",background:"rgba(0,229,255,0.1)",color:"#00E5FF",
+              border:"1px solid #00E5FF",borderRadius:10,padding:"10px",fontSize:12,fontWeight:700,
+              cursor:"pointer",marginBottom:12
+            }}>⚡ Slides aus aktuellem Generator-Output</button>
+          )}
+
+          {slideGenerated && (
+            <div>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+                <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2}}>VORSCHAU ({slideGenerated.slides.length} SLIDES)</div>
+                <button onClick={downloadAllSlides} style={{
+                  background:"linear-gradient(135deg,#00FF88,#00E5FF)",color:"#000",
+                  border:"none",borderRadius:8,padding:"8px 14px",fontSize:11,fontWeight:800,cursor:"pointer"
+                }}>⬇️ Alle downloaden</button>
+              </div>
+              {slideGenerated.slides.map((s,i)=>(
+                <div key={i} style={{marginBottom:12}}>
+                  <div style={{fontSize:9,color:"#7A84A8",marginBottom:4}}>SLIDE {i+1} — {["HOOK","FRAGE","ERGEBNIS","CTA"][i]}</div>
+                  <div style={{position:"relative"}}>
+                    <img src={s} style={{width:"100%",borderRadius:12,border:`1px solid ${slideGenerated.test.color}40`,display:"block"}} alt={`Slide ${i+1}`} />
+                    <button onClick={()=>downloadSlide(s,i,slideGenerated.test.name)} style={{
+                      position:"absolute",bottom:8,right:8,
+                      background:"rgba(0,0,0,0.7)",color:"#fff",border:"1px solid rgba(255,255,255,0.3)",
+                      borderRadius:6,padding:"6px 10px",fontSize:10,fontWeight:700,cursor:"pointer"
+                    }}>⬇️ PNG</button>
+                  </div>
+                </div>
+              ))}
+              <button onClick={downloadAllSlides} style={{
+                width:"100%",background:"linear-gradient(135deg,#00FF88,#00E5FF)",color:"#000",
+                border:"none",borderRadius:12,padding:"14px",fontSize:14,fontWeight:800,cursor:"pointer",marginTop:4
+              }}>⬇️ Alle 4 Slides als PNG downloaden</button>
             </div>
           )}
         </div>
