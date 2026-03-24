@@ -705,7 +705,7 @@ function ContentGenerator() {
         </div>
       )}
 
-      {/* SCRIPT TAB */
+      {/* SCRIPT TAB */}
       {tab==="script" && (
         <div>
           <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:4}}>🎬 SCRIPT BIBLIOTHEK</div>
