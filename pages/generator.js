@@ -349,6 +349,10 @@ function ContentGenerator() {
   const [aiLoading, setAiLoading] = useState(false);
   const [aiScript, setAiScript] = useState(null);
   const [aiError, setAiError] = useState(null);
+  const [optimizeLoading, setOptimizeLoading] = useState(false);
+  const [optimizeResult, setOptimizeResult] = useState(null);
+  const [optimizeError, setOptimizeError] = useState(null);
+  const [optimizeInput, setOptimizeInput] = useState({hook:"",frage:"",antworten:["","","",""],ergebnis:"",cta:""});
 
   const generate = () => {
     const hook = selectedTest.hooks[Math.floor(Math.random()*selectedTest.hooks.length)];
@@ -417,6 +421,40 @@ function ContentGenerator() {
     setTimeout(()=>setCopied(null),2000);
   };
 
+  const generateOptimize = async () => {
+    setOptimizeLoading(true);
+    setOptimizeError(null);
+    setOptimizeResult(null);
+    try {
+      const res = await fetch("/api/optimize-content", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(optimizeInput)
+      });
+      const data = await res.json();
+      if (data.result) {
+        setOptimizeResult(data.result);
+      } else {
+        setOptimizeError(data.error || "Fehler beim Optimieren");
+      }
+    } catch(e) {
+      setOptimizeError("API nicht erreichbar");
+    }
+    setOptimizeLoading(false);
+  };
+
+  const fillFromGenerated = () => {
+    if (!generated) return;
+    setOptimizeInput({
+      hook: generated.hook,
+      frage: generated.frage.q,
+      antworten: generated.frage.a,
+      ergebnis: generated.ergebnis.name + " — " + generated.ergebnis.desc,
+      cta: "Welcher Typ bist DU? Link in der Bio 👇"
+    });
+    setTab("optimize");
+  };
+
   const getScriptForTest = (testId) => {
     const scripts = SCRIPTS[testId];
     if (!scripts) return null;
@@ -438,7 +476,7 @@ function ContentGenerator() {
 
       {/* Tabs */}
       <div style={{display:"flex",gap:4,marginBottom:16,overflowX:"auto"}}>
-        {[{id:"generate",label:"⚡ Generator"},{id:"batch",label:"📦 Batch"},{id:"script",label:"🎬 Script"},{id:"trends",label:"📈 Trends"},{id:"calendar",label:"📅 Plan"}].map(t=>(
+        {[{id:"generate",label:"⚡ Generator"},{id:"batch",label:"📦 Batch"},{id:"optimize",label:"🔥 Optimieren"},{id:"script",label:"🎬 Script"},{id:"trends",label:"📈 Trends"},{id:"calendar",label:"📅 Plan"}].map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)} style={{
             flexShrink:0,background:tab===t.id?"rgba(0,229,255,0.15)":"rgba(22,28,53,0.7)",
             border:`1px solid ${tab===t.id?"#00E5FF":"#1A2040"}`,borderRadius:8,padding:"8px 10px",
@@ -515,6 +553,12 @@ function ContentGenerator() {
                   }}>{copied==="vo"?"✅ Kopiert":"📋 Kopieren"}</button>
                 </div>
               )}
+
+              {/* Optimieren Button */}
+              <button onClick={fillFromGenerated} style={{
+                width:"100%",background:"linear-gradient(135deg,#FF6B35,#FF2255)",color:"#fff",
+                border:"none",borderRadius:12,padding:"10px",fontSize:12,fontWeight:700,cursor:"pointer",marginBottom:8
+              }}>🔥 Diesen Output optimieren</button>
 
               {/* KI Script Button */}
               <button onClick={generateAiScript} disabled={aiLoading} style={{
@@ -600,7 +644,68 @@ function ContentGenerator() {
         </div>
       )}
 
-      {/* SCRIPT TAB */}
+      {/* OPTIMIZE TAB */}
+      {tab==="optimize" && (
+        <div>
+          <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:4}}>🔥 OPTIMIERUNGS-LAYER</div>
+          <div style={{fontSize:10,color:"#7A84A8",marginBottom:12}}>Bestehenden Output schärfen. Nicht neu erfinden — aggressiv verbessern.</div>
+
+          {/* Input Felder */}
+          <div style={{marginBottom:8}}>
+            <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>HOOK</div>
+            <input value={optimizeInput.hook} onChange={e=>setOptimizeInput(p=>({...p,hook:e.target.value}))}
+              placeholder="z.B. Nur 2% der Menschen sind dieser Typ..."
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+          </div>
+          <div style={{marginBottom:8}}>
+            <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>FRAGE</div>
+            <input value={optimizeInput.frage} onChange={e=>setOptimizeInput(p=>({...p,frage:e.target.value}))}
+              placeholder="z.B. Du bist auf einer Party. Was machst du?"
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+          </div>
+          <div style={{marginBottom:8}}>
+            <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>ANTWORTEN (eine pro Zeile)</div>
+            <textarea value={optimizeInput.antworten.join("\n")} onChange={e=>setOptimizeInput(p=>({...p,antworten:e.target.value.split("\n")}))}
+              rows={4} placeholder="🎤 Unterhalte alle\n🤫 Tiefe Gespräche\n👀 Beobachten\n🎯 Organisiere alles"
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",resize:"none",boxSizing:"border-box"}} />
+          </div>
+          <div style={{marginBottom:8}}>
+            <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>ERGEBNIS</div>
+            <input value={optimizeInput.ergebnis} onChange={e=>setOptimizeInput(p=>({...p,ergebnis:e.target.value}))}
+              placeholder="z.B. INTJ — Strategisch. Unabhängig. Visionär."
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+          </div>
+          <div style={{marginBottom:12}}>
+            <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>CTA</div>
+            <input value={optimizeInput.cta} onChange={e=>setOptimizeInput(p=>({...p,cta:e.target.value}))}
+              placeholder="z.B. Welcher Typ bist DU? Link in der Bio 👇"
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+          </div>
+
+          <button onClick={generateOptimize} disabled={optimizeLoading || !optimizeInput.hook} style={{
+            width:"100%",background:optimizeLoading?"rgba(22,28,53,0.7)":"linear-gradient(135deg,#FF6B35,#FF2255)",color:"#fff",
+            border:"none",borderRadius:12,padding:"14px",fontSize:14,fontWeight:700,cursor:optimizeLoading?"not-allowed":"pointer",marginBottom:12,opacity:optimizeLoading?0.7:1
+          }}>{optimizeLoading?"🔥 KI optimiert...":"🔥 Jetzt optimieren"}</button>
+
+          {optimizeError && <div style={{color:"#FF2255",fontSize:11,marginBottom:8,textAlign:"center"}}>{optimizeError}</div>}
+
+          {optimizeResult && (
+            <div>
+              <div style={{background:"rgba(255,107,53,0.08)",borderRadius:12,padding:16,marginBottom:8,border:"1px solid rgba(255,107,53,0.25)"}}>
+                <div style={{fontSize:9,color:"#FF6B35",letterSpacing:2,marginBottom:8}}>🔥 OPTIMIERTER OUTPUT</div>
+                <pre style={{fontSize:11,color:"#D8DDF0",whiteSpace:"pre-wrap",margin:0,lineHeight:1.8}}>{optimizeResult}</pre>
+                <button onClick={()=>copyText(optimizeResult,"opt")} style={{
+                  width:"100%",background:copied==="opt"?"#00FF8820":"transparent",
+                  border:`1px solid ${copied==="opt"?"#00FF88":"rgba(255,107,53,0.4)"}`,borderRadius:8,
+                  padding:"8px",fontSize:11,color:copied==="opt"?"#00FF88":"#FF6B35",cursor:"pointer",fontWeight:700,marginTop:10
+                }}>{copied==="opt"?"✅ Kopiert!":"📋 Alles kopieren"}</button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* SCRIPT TAB */
       {tab==="script" && (
         <div>
           <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:4}}>🎬 SCRIPT BIBLIOTHEK</div>
