@@ -35,10 +35,114 @@ const nextConfig = {
   
   async redirects() {
     return [
+      // www → non-www für Hauptdomain
       {
         source: "/:path*",
         has: [{ type: "host", value: "www.persoenlichkeitstest-kostenlos.de" }],
         destination: "https://persoenlichkeitstest-kostenlos.de/:path*",
+        permanent: true,
+      },
+      // www-Varianten aller Keyword-Domains
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.rizz-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/rizz",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.rizz-score.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/rizz",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.aura-check-online.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/aura",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.aura-test-kostenlos.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/aura",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.mein-aura-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/aura",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.brainrot-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/brainrot",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.npc-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/npc",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.dark-triad-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/dark",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.dark-personality-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/dark",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.toxicity-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/toxicity",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.red-flag-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/redflag",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.welcher-typ-bin-ich.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.wer-bin-ich-test.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.der-persoenlichkeitstest.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.ki-persoenlichkeitstest.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/ki-test",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.persoenlichkeitstest-online.de" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.findur.app" }],
+        destination: "https://persoenlichkeitstest-kostenlos.de/",
         permanent: true,
       },
     ];

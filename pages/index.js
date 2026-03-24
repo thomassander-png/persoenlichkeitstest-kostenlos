@@ -694,6 +694,47 @@ export default function Home() {
   };
   const goHome = () => { setPage("home"); setTestId(null); setResultData(null); };
 
+  const getShareText = () => {
+    if (!resultData) return "";
+    if (resultData.type === "persoenlichkeit") return `Ich bin ${resultData.code} – ${resultData.name}! Nur ${resultData.pct} der Menschen teilen diesen Typ. 🧠`;
+    return `Mein Ergebnis: ${resultData.emoji || ""} ${resultData.title} — Mach den Test auch! 🔥`;
+  };
+
+  const getShareUrl = () => {
+    if (!testId) return "https://persoenlichkeitstest-kostenlos.de/";
+    return `https://persoenlichkeitstest-kostenlos.de/${testId}`;
+  };
+
+  const handleShare = (platform) => {
+    const text = getShareText();
+    const url = getShareUrl();
+    if (platform === "whatsapp") {
+      window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, "_blank");
+    } else if (platform === "twitter") {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank");
+    } else if (platform === "copy") {
+      navigator.clipboard.writeText(text + " " + url).then(() => {
+        alert("Link kopiert! ✅");
+      }).catch(() => {
+        const el = document.createElement("textarea");
+        el.value = text + " " + url;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+        alert("Link kopiert! ✅");
+      });
+    } else if (platform === "native") {
+      if (navigator.share) {
+        navigator.share({ title: "Persönlichkeitstest", text, url });
+      }
+    }
+    // GA4 Event
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "share", { method: platform, content_type: testId, item_id: resultData?.title || resultData?.code });
+    }
+  };
+
   const getQuestions = () => {
     switch (testId) {
       case "persoenlichkeit": return PERSONALITY_QUESTIONS;
@@ -1101,13 +1142,20 @@ export default function Home() {
             )}
 
             {/* Share */}
-            <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
-              {[{ name: "WhatsApp", color: "#25D366", icon: "💬" }, { name: "X/Twitter", color: "#1DA1F2", icon: "𝕏" }, { name: "Link kopieren", color: "#7A84A8", icon: "🔗" }].map((s, i) => (
-                <button key={i} style={{ flex: 1, background: `${s.color}15`, border: `1px solid ${s.color}30`, borderRadius: 10, padding: "10px 8px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-                  <span style={{ fontSize: 16 }}>{s.icon}</span>
-                  <span style={{ fontSize: 9, color: s.color, fontWeight: 600 }}>{s.name}</span>
-                </button>
-              ))}
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ fontSize: 11, color: "#7A84A8", letterSpacing: 2, marginBottom: 10 }}>ERGEBNIS TEILEN</div>
+              <div style={{ display: "flex", gap: 8 }}>
+                {[
+                  { name: "WhatsApp", color: "#25D366", icon: "💬", platform: "whatsapp" },
+                  { name: "X/Twitter", color: "#1DA1F2", icon: "𝕏", platform: "twitter" },
+                  { name: "Link kopieren", color: "#A855F7", icon: "🔗", platform: "copy" }
+                ].map((s, i) => (
+                  <button key={i} onClick={() => handleShare(s.platform)} style={{ flex: 1, background: `${s.color}15`, border: `1px solid ${s.color}40`, borderRadius: 10, padding: "12px 8px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 4, transition: "all 0.2s" }}>
+                    <span style={{ fontSize: 18 }}>{s.icon}</span>
+                    <span style={{ fontSize: 9, color: s.color, fontWeight: 700 }}>{s.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* More Tests */}

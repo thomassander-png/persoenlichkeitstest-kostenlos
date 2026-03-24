@@ -181,7 +181,7 @@ export default function Page() {
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:site_name" content="persoenlichkeitstest-kostenlos.de" />
-        <meta property="og:image" content="https://persoenlichkeitstest-kostenlos.de/og-image.png" />
+        <meta property="og:image" content="https://persoenlichkeitstest-kostenlos.de/og-toxicity.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -189,7 +189,7 @@ export default function Page() {
         <meta name="twitter:creator" content="@persoenlichkeitstests" />
         <meta name="twitter:title" content="Toxicity Test kostenlos — Wie toxisch bin ich? | persoenlichkeitstest-kostenlos.de" />
         <meta name="twitter:description" content="Mach den kostenlosen Toxicity Test und finde heraus wie toxisch du wirklich bist! Wie toxisch bin ich Test mit sofortigem Ergebnis. Toxisch Test kostenlos. Jetzt starten!" />
-        <meta name="twitter:image" content="https://persoenlichkeitstest-kostenlos.de/og-image.png" />
+        <meta name="twitter:image" content="https://persoenlichkeitstest-kostenlos.de/og-toxicity.png" />
         <meta name="geo.region" content="DE" />
         <meta name="geo.placename" content="Berlin" />
         <meta name="geo.position" content="52.5200;13.4050" />

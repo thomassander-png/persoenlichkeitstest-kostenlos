@@ -182,7 +182,7 @@ export default function Page() {
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:site_name" content="persoenlichkeitstest-kostenlos.de" />
-        <meta property="og:image" content="https://persoenlichkeitstest-kostenlos.de/og-image.png" />
+        <meta property="og:image" content="https://persoenlichkeitstest-kostenlos.de/og-dark.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -190,7 +190,7 @@ export default function Page() {
         <meta name="twitter:creator" content="@persoenlichkeitstests" />
         <meta name="twitter:title" content="Dark Triad Test kostenlos — Narzissmus & Psychopathie Test | persoenlichkeitstest-kostenlos.de" />
         <meta name="twitter:description" content="Mach den kostenlosen Dark Triad Test! Teste dein Niveau an Narzissmus, Machiavellismus und Psychopathie. Dark Triad Test Deutsch mit sofortigem Ergebnis. Jetzt starten!" />
-        <meta name="twitter:image" content="https://persoenlichkeitstest-kostenlos.de/og-image.png" />
+        <meta name="twitter:image" content="https://persoenlichkeitstest-kostenlos.de/og-dark.png" />
         <meta name="geo.region" content="DE" />
         <meta name="geo.placename" content="Berlin" />
         <meta name="geo.position" content="52.5200;13.4050" />
