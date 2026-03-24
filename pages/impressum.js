@@ -5,7 +5,7 @@ export default function Impressum() {
   return (
     <>
       <Head>
-        <title>Impressum | findur.app</title>
+        <title>Impressum | persoenlichkeitstest-kostenlos.de</title>
         <meta name="robots" content="noindex" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -104,7 +104,7 @@ export default function Impressum() {
             <Link href="/impressum" style={{ fontSize: 10, color: "#00E5FF", textDecoration: "none" }}>Impressum</Link>
             <Link href="/datenschutz" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Datenschutz</Link>
           </div>
-          <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · findur.app</div>
+          <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · persoenlichkeitstest-kostenlos.de</div>
         </div>
       </div>
     </>

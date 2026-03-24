@@ -11,13 +11,13 @@ export default function Page() {
 
   return (
     <Head>
-      <title>Red Flag Detector — Wie viele Red Flags hast du? | findur.app</title>
+      <title>Red Flag Detector — Wie viele Red Flags hast du? | persoenlichkeitstest-kostenlos.de</title>
       <meta name="description" content="Teste dich mit dem Red Flag Detector! Wie viele Red Flags hast du in Beziehungen? Kostenloser Test auf Deutsch." />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://findur.app/redflag" />
-      <meta property="og:title" content="Red Flag Detector — Wie viele Red Flags hast du? | findur.app" />
+      <link rel="canonical" href="https://persoenlichkeitstest-kostenlos.de/redflag" />
+      <meta property="og:title" content="Red Flag Detector — Wie viele Red Flags hast du? | persoenlichkeitstest-kostenlos.de" />
       <meta property="og:description" content="Teste dich mit dem Red Flag Detector! Wie viele Red Flags hast du in Beziehungen? Kostenloser Test auf Deutsch." />
-      <meta property="og:url" content="https://findur.app/redflag" />
+      <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de/redflag" />
     </Head>
   );
 }

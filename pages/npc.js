@@ -11,13 +11,13 @@ export default function Page() {
 
   return (
     <Head>
-      <title>NPC Test — Main Character oder Hintergrundstatist? | findur.app</title>
+      <title>NPC Test — Main Character oder Hintergrundstatist? | persoenlichkeitstest-kostenlos.de</title>
       <meta name="description" content="Bist du ein Main Character oder ein NPC? Mach den kostenlosen NPC-Test und finde es heraus!" />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://findur.app/npc" />
-      <meta property="og:title" content="NPC Test — Main Character oder Hintergrundstatist? | findur.app" />
+      <link rel="canonical" href="https://persoenlichkeitstest-kostenlos.de/npc" />
+      <meta property="og:title" content="NPC Test — Main Character oder Hintergrundstatist? | persoenlichkeitstest-kostenlos.de" />
       <meta property="og:description" content="Bist du ein Main Character oder ein NPC? Mach den kostenlosen NPC-Test und finde es heraus!" />
-      <meta property="og:url" content="https://findur.app/npc" />
+      <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de/npc" />
     </Head>
   );
 }

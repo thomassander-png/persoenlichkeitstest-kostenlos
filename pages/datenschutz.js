@@ -5,7 +5,7 @@ export default function Datenschutz() {
   return (
     <>
       <Head>
-        <title>Datenschutzerklärung | findur.app</title>
+        <title>Datenschutzerklärung | persoenlichkeitstest-kostenlos.de</title>
         <meta name="robots" content="noindex" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -121,7 +121,7 @@ export default function Datenschutz() {
         <section style={{ marginBottom: 28 }}>
           <h2 style={{ fontSize: 16, fontWeight: 700, color: "#00E5FF", marginBottom: 12 }}>10. Aktualität und Änderung dieser Datenschutzerklärung</h2>
           <p style={{ fontSize: 13, color: "#7A84A8", lineHeight: 1.7 }}>
-            Diese Datenschutzerklärung ist aktuell gültig und hat den Stand März 2026. Durch die Weiterentwicklung unserer Website und Angebote oder aufgrund geänderter gesetzlicher beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Datenschutzerklärung kann jederzeit auf der Website unter <a href="https://findur.app/datenschutz" style={{ color: "#00E5FF", textDecoration: "none" }}>findur.app/datenschutz</a> abgerufen und ausgedruckt werden.
+            Diese Datenschutzerklärung ist aktuell gültig und hat den Stand März 2026. Durch die Weiterentwicklung unserer Website und Angebote oder aufgrund geänderter gesetzlicher beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Datenschutzerklärung kann jederzeit auf der Website unter <a href="https://persoenlichkeitstest-kostenlos.de/datenschutz" style={{ color: "#00E5FF", textDecoration: "none" }}>persoenlichkeitstest-kostenlos.de/datenschutz</a> abgerufen und ausgedruckt werden.
           </p>
         </section>
 
@@ -131,7 +131,7 @@ export default function Datenschutz() {
             <Link href="/impressum" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Impressum</Link>
             <Link href="/datenschutz" style={{ fontSize: 10, color: "#00E5FF", textDecoration: "none" }}>Datenschutz</Link>
           </div>
-          <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · findur.app</div>
+          <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · persoenlichkeitstest-kostenlos.de</div>
         </div>
       </div>
     </>

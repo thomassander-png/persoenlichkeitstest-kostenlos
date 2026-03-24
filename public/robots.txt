@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://findur.app/sitemap.xml
+Sitemap: https://persoenlichkeitstest-kostenlos.de/sitemap.xml

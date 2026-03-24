@@ -11,13 +11,13 @@ export default function Page() {
 
   return (
     <Head>
-      <title>Toxicity Check — Wie toxisch bist du wirklich? | findur.app</title>
+      <title>Toxicity Check — Wie toxisch bist du wirklich? | persoenlichkeitstest-kostenlos.de</title>
       <meta name="description" content="Mach den kostenlosen Toxicity Check und finde heraus wie toxisch dein Verhalten wirklich ist. Ehrlich, anonym, kostenlos." />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://findur.app/toxicity" />
-      <meta property="og:title" content="Toxicity Check — Wie toxisch bist du wirklich? | findur.app" />
+      <link rel="canonical" href="https://persoenlichkeitstest-kostenlos.de/toxicity" />
+      <meta property="og:title" content="Toxicity Check — Wie toxisch bist du wirklich? | persoenlichkeitstest-kostenlos.de" />
       <meta property="og:description" content="Mach den kostenlosen Toxicity Check und finde heraus wie toxisch dein Verhalten wirklich ist. Ehrlich, anonym, kostenlos." />
-      <meta property="og:url" content="https://findur.app/toxicity" />
+      <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de/toxicity" />
     </Head>
   );
 }

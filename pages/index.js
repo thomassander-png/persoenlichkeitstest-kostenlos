@@ -541,9 +541,9 @@ const schemaData = {
   "@graph": [
     {
       "@type": "WebApplication",
-      "@id": "https://findur.app/#webapp",
-      "name": "findur.app — Kostenlose Persönlichkeitstests",
-      "url": "https://findur.app",
+      "@id": "https://persoenlichkeitstest-kostenlos.de/#webapp",
+      "name": "persoenlichkeitstest-kostenlos.de — Kostenlose Persönlichkeitstests",
+      "url": "https://persoenlichkeitstest-kostenlos.de",
       "description": "Kostenlose KI-gestützte Persönlichkeitstests auf Deutsch. Persönlichkeitstest 16 Typen, Rizz Score, Aura Check, Brainrot Test, Dark Triad, NPC Test, Toxicity Check und Red Flag Detector.",
       "applicationCategory": "LifestyleApplication",
       "operatingSystem": "Web",
@@ -551,7 +551,7 @@ const schemaData = {
       "author": {
         "@type": "Organization",
         "name": "Social Media Venture GmbH",
-        "url": "https://findur.app",
+        "url": "https://persoenlichkeitstest-kostenlos.de",
         "address": { "@type": "PostalAddress", "streetAddress": "Schliemannstraße 23", "addressLocality": "Berlin", "postalCode": "10437", "addressCountry": "DE" }
       },
       "inLanguage": "de-DE",
@@ -565,8 +565,8 @@ const schemaData = {
         { "@type": "Question", "name": "Was ist ein Aura Check?", "acceptedAnswer": { "@type": "Answer", "text": "Ein Aura Check analysiert deine persönliche Energie und Ausstrahlung. Basierend auf deinen Antworten zu Persönlichkeit, Verhalten und Vorlieben wird deine dominante Aura-Farbe bestimmt: Mystisch (Violett), Solar (Gold), Heilend (Grün) oder Feuer (Orange)." } },
         { "@type": "Question", "name": "Was ist der Dark Triad Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der Dark Triad Test misst drei Persönlichkeitsmerkmale: Narzissmus (übertriebenes Selbstbewusstsein), Machiavellismus (strategisches, manipulatives Denken) und subklinische Psychopathie (emotionale Distanz). Diese Eigenschaften kommen in unterschiedlichem Ausmaß bei fast allen Menschen vor." } },
         { "@type": "Question", "name": "Was bedeutet Brainrot?", "acceptedAnswer": { "@type": "Answer", "text": "Brainrot beschreibt den Effekt von übermäßigem Social-Media-Konsum auf die Aufmerksamkeitsspanne und das Denken. Symptome sind verkürzte Konzentrationsfähigkeit, Denken in Memes und Schwierigkeiten, lange Texte zu lesen. Der Brainrot Score Test misst, wie stark TikTok und Co. dein Denken beeinflusst haben." } },
-        { "@type": "Question", "name": "Sind die Tests wissenschaftlich fundiert?", "acceptedAnswer": { "@type": "Answer", "text": "Die Tests auf findur.app basieren auf etablierten psychologischen Konzepten und sind für Unterhaltungs- und Selbstreflexionszwecke konzipiert. Der Persönlichkeitstest basiert auf dem MBTI-Framework. Für klinische Diagnosen empfehlen wir professionelle psychologische Beratung." } },
-        { "@type": "Question", "name": "Kostet findur.app etwas?", "acceptedAnswer": { "@type": "Answer", "text": "Alle Tests auf findur.app sind 100% kostenlos. Es ist kein Account oder keine Registrierung erforderlich. Du kannst alle Tests sofort und ohne Einschränkungen nutzen." } },
+        { "@type": "Question", "name": "Sind die Tests wissenschaftlich fundiert?", "acceptedAnswer": { "@type": "Answer", "text": "Die Tests auf persoenlichkeitstest-kostenlos.de basieren auf etablierten psychologischen Konzepten und sind für Unterhaltungs- und Selbstreflexionszwecke konzipiert. Der Persönlichkeitstest basiert auf dem MBTI-Framework. Für klinische Diagnosen empfehlen wir professionelle psychologische Beratung." } },
+        { "@type": "Question", "name": "Kostet persoenlichkeitstest-kostenlos.de etwas?", "acceptedAnswer": { "@type": "Answer", "text": "Alle Tests auf persoenlichkeitstest-kostenlos.de sind 100% kostenlos. Es ist kein Account oder keine Registrierung erforderlich. Du kannst alle Tests sofort und ohne Einschränkungen nutzen." } },
         { "@type": "Question", "name": "Was ist ein NPC Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der NPC Test (Non-Player Character) prüft, ob du ein 'Main Character' bist — also jemand der sein Leben aktiv gestaltet und eigene Überzeugungen hat — oder ein NPC, der hauptsächlich nach dem Skript anderer lebt. Der Begriff stammt aus der Gaming-Kultur." } }
       ]
     }
@@ -686,21 +686,21 @@ export default function Home() {
       <Script id="schema-org" type="application/ld+json" strategy="beforeInteractive">{JSON.stringify(schemaData)}</Script>
 
       <Head>
-        <title>Kostenloser Persönlichkeitstest 2026 | KI-Analyse | findur.app</title>
-        <meta name="description" content="Mach den kostenlosen Persönlichkeitstest 2026 auf findur.app. 8 Tests: 16 Persönlichkeitstypen, Rizz Score, Aura Check, Brainrot Test, Dark Triad, NPC Test. Sofortiges Ergebnis, kein Account nötig." />
+        <title>Kostenloser Persönlichkeitstest 2026 | KI-Analyse | persoenlichkeitstest-kostenlos.de</title>
+        <meta name="description" content="Mach den kostenlosen Persönlichkeitstest 2026 auf persoenlichkeitstest-kostenlos.de. 8 Tests: 16 Persönlichkeitstypen, Rizz Score, Aura Check, Brainrot Test, Dark Triad, NPC Test. Sofortiges Ergebnis, kein Account nötig." />
         <meta name="keywords" content="Persönlichkeitstest kostenlos, Rizz Test, Aura Check, Brainrot Test, Dark Triad Test, NPC Test, Toxicity Test, Red Flag Test, 16 Persönlichkeitstypen, MBTI Test Deutsch" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://findur.app/" />
+        <link rel="canonical" href="https://persoenlichkeitstest-kostenlos.de/" />
         {/* Open Graph */}
-        <meta property="og:title" content="Kostenloser Persönlichkeitstest 2026 | findur.app" />
+        <meta property="og:title" content="Kostenloser Persönlichkeitstest 2026 | persoenlichkeitstest-kostenlos.de" />
         <meta property="og:description" content="8 kostenlose Persönlichkeitstests: Persönlichkeitstest, Rizz Score, Aura Check, Brainrot Score und mehr. KI-analysiert, sofortiges Ergebnis." />
-        <meta property="og:url" content="https://findur.app" />
+        <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="de_DE" />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Kostenloser Persönlichkeitstest 2026 | findur.app" />
+        <meta name="twitter:title" content="Kostenloser Persönlichkeitstest 2026 | persoenlichkeitstest-kostenlos.de" />
         <meta name="twitter:description" content="Wer bist du wirklich? 8 kostenlose Tests: Persönlichkeit, Rizz, Aura, Brainrot und mehr." />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -763,7 +763,7 @@ export default function Home() {
             <div style={{ padding: "20px 16px", borderTop: "1px solid #1A2040" }}>
               <h2 style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 10 }}>Kostenloser Persönlichkeitstest 2026</h2>
               <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
-                Entdecke deinen Persönlichkeitstyp mit dem kostenlosen KI-Persönlichkeitstest auf findur.app. Basierend auf den 16 Persönlichkeitstypen (MBTI) analysiert unser Test in nur 12 Fragen, ob du ein Architekt (INTJ), Mediator (INFP), Entertainer (ESFP) oder einer der anderen 13 Typen bist. Kein Account nötig, 100% kostenlos, sofortiges Ergebnis.
+                Entdecke deinen Persönlichkeitstyp mit dem kostenlosen KI-Persönlichkeitstest auf persoenlichkeitstest-kostenlos.de. Basierend auf den 16 Persönlichkeitstypen (MBTI) analysiert unser Test in nur 12 Fragen, ob du ein Architekt (INTJ), Mediator (INFP), Entertainer (ESFP) oder einer der anderen 13 Typen bist. Kein Account nötig, 100% kostenlos, sofortiges Ergebnis.
               </p>
 
               <h2 style={{ fontSize: 15, fontWeight: 800, color: "#fff", marginBottom: 8 }}>Rizz Score Test — Wie viel Charisma hast du?</h2>
@@ -784,7 +784,7 @@ export default function Home() {
               {/* FAQ Section */}
               <h2 style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 12, marginTop: 20 }}>Häufige Fragen</h2>
               {[
-                { q: "Sind die Tests kostenlos?", a: "Ja, alle 8 Tests auf findur.app sind 100% kostenlos. Kein Account, keine Registrierung, kein Abo." },
+                { q: "Sind die Tests kostenlos?", a: "Ja, alle 8 Tests auf persoenlichkeitstest-kostenlos.de sind 100% kostenlos. Kein Account, keine Registrierung, kein Abo." },
                 { q: "Wie lange dauern die Tests?", a: "Die meisten Tests dauern 2-3 Minuten. Der Persönlichkeitstest hat 12 Fragen, alle anderen Tests haben 8-10 Fragen." },
                 { q: "Sind die Ergebnisse wissenschaftlich?", a: "Die Tests basieren auf etablierten psychologischen Konzepten (MBTI, Dark Triad) und sind für Selbstreflexion und Unterhaltung konzipiert. Für klinische Diagnosen empfehlen wir professionelle Beratung." },
                 { q: "Werden meine Daten gespeichert?", a: "Nein. Die Tests laufen vollständig im Browser. Es werden keine persönlichen Daten gespeichert oder weitergegeben. Details in unserer Datenschutzerklärung." },
@@ -802,7 +802,7 @@ export default function Home() {
                 <a href="/impressum" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Impressum</a>
                 <a href="/datenschutz" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Datenschutz</a>
               </div>
-              <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · findur.app</div>
+              <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · persoenlichkeitstest-kostenlos.de</div>
             </div>
           </div>
         )}
@@ -911,7 +911,7 @@ export default function Home() {
                 <a href="/impressum" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Impressum</a>
                 <a href="/datenschutz" style={{ fontSize: 10, color: "#7A84A8", textDecoration: "none" }}>Datenschutz</a>
               </div>
-              <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · findur.app</div>
+              <div style={{ fontSize: 10, color: "#4A5470" }}>© 2026 Social Media Venture GmbH · persoenlichkeitstest-kostenlos.de</div>
             </div>
           </div>
         )}

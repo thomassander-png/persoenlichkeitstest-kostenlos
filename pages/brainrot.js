@@ -11,13 +11,13 @@ export default function Page() {
 
   return (
     <Head>
-      <title>Brainrot Score Test — Wie kaputt ist dein Gehirn? | findur.app</title>
+      <title>Brainrot Score Test — Wie kaputt ist dein Gehirn? | persoenlichkeitstest-kostenlos.de</title>
       <meta name="description" content="Teste deinen Brainrot Score! Wie sehr hat TikTok und Social Media dein Gehirn beeinflusst? Kostenloser Test auf Deutsch." />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://findur.app/brainrot" />
-      <meta property="og:title" content="Brainrot Score Test — Wie kaputt ist dein Gehirn? | findur.app" />
+      <link rel="canonical" href="https://persoenlichkeitstest-kostenlos.de/brainrot" />
+      <meta property="og:title" content="Brainrot Score Test — Wie kaputt ist dein Gehirn? | persoenlichkeitstest-kostenlos.de" />
       <meta property="og:description" content="Teste deinen Brainrot Score! Wie sehr hat TikTok und Social Media dein Gehirn beeinflusst? Kostenloser Test auf Deutsch." />
-      <meta property="og:url" content="https://findur.app/brainrot" />
+      <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de/brainrot" />
     </Head>
   );
 }

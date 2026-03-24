@@ -11,13 +11,13 @@ export default function Page() {
 
   return (
     <Head>
-      <title>KI Persönlichkeitstest — Kostenlos auf Deutsch | findur.app</title>
-      <meta name="description" content="Der KI-gestützte Persönlichkeitstest auf findur.app. Finde heraus welcher Typ du wirklich bist — kostenlos, auf Deutsch, in 3 Minuten." />
+      <title>KI Persönlichkeitstest — Kostenlos auf Deutsch | persoenlichkeitstest-kostenlos.de</title>
+      <meta name="description" content="Der KI-gestützte Persönlichkeitstest auf persoenlichkeitstest-kostenlos.de. Finde heraus welcher Typ du wirklich bist — kostenlos, auf Deutsch, in 3 Minuten." />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://findur.app/ki-test" />
-      <meta property="og:title" content="KI Persönlichkeitstest — Kostenlos auf Deutsch | findur.app" />
-      <meta property="og:description" content="Der KI-gestützte Persönlichkeitstest auf findur.app. Finde heraus welcher Typ du wirklich bist — kostenlos, auf Deutsch, in 3 Minuten." />
-      <meta property="og:url" content="https://findur.app/ki-test" />
+      <link rel="canonical" href="https://persoenlichkeitstest-kostenlos.de/ki-test" />
+      <meta property="og:title" content="KI Persönlichkeitstest — Kostenlos auf Deutsch | persoenlichkeitstest-kostenlos.de" />
+      <meta property="og:description" content="Der KI-gestützte Persönlichkeitstest auf persoenlichkeitstest-kostenlos.de. Finde heraus welcher Typ du wirklich bist — kostenlos, auf Deutsch, in 3 Minuten." />
+      <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de/ki-test" />
     </Head>
   );
 }
