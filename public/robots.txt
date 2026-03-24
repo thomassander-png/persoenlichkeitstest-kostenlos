@@ -6,6 +6,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Disallow: /generator
 
 # Google (max-snippet für KI-Snippets erlauben)
 User-agent: Googlebot
