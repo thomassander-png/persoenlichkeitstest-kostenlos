@@ -602,7 +602,13 @@ export default function Home() {
     }
   }, [router.isReady, router.query.test]);
 
-  const startTest = (id) => { setTestId(id); setPage("test"); setCurrent(0); setScores({}); setAnswers([]); setSelected(null); setResultData(null); };
+  const startTest = (id) => {
+    // GA4 Event: Test gestartet
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'test_start', { event_category: 'engagement', event_label: id, test_name: id });
+    }
+    setTestId(id); setPage("test"); setCurrent(0); setScores({}); setAnswers([]); setSelected(null); setResultData(null);
+  };
   const goHome = () => { setPage("home"); setTestId(null); setResultData(null); };
 
   const getQuestions = () => {
@@ -661,7 +667,16 @@ export default function Home() {
           result = { ...getScoreResult(REDFLAG_RESULTS, total), total, type: "redflag" };
         }
         setResultData(result);
-        setPage("result");
+        // GA4 Event: Test abgeschlossen
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'test_complete', {
+        event_category: 'engagement',
+        event_label: testId,
+        test_name: testId,
+        value: 1
+      });
+    }
+    setPage("result");
       }
     }, 350);
   };
