@@ -540,40 +540,123 @@ const schemaData = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://persoenlichkeitstest-kostenlos.de/#website",
+      "url": "https://persoenlichkeitstest-kostenlos.de/",
+      "name": "Persönlichkeitstest Kostenlos",
+      "description": "Kostenlose Persönlichkeitstests auf Deutsch – ohne Anmeldung, sofort spielbar.",
+      "inLanguage": "de-DE",
+      "publisher": { "@id": "https://persoenlichkeitstest-kostenlos.de/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://persoenlichkeitstest-kostenlos.de/?test={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://persoenlichkeitstest-kostenlos.de/#organization",
+      "name": "Persönlichkeitstest Kostenlos",
+      "url": "https://persoenlichkeitstest-kostenlos.de/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://persoenlichkeitstest-kostenlos.de/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "sameAs": [
+        "https://www.tiktok.com/@persoenlichkeitstests"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Schliemannstraße 23",
+        "addressLocality": "Berlin",
+        "postalCode": "10437",
+        "addressCountry": "DE"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": "German",
+        "email": "info@persoenlichkeitstest-kostenlos.de"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://persoenlichkeitstest-kostenlos.de/#webpage",
+      "url": "https://persoenlichkeitstest-kostenlos.de/",
+      "name": "Kostenlose Persönlichkeitstests auf Deutsch – Rizz, Aura, Brainrot & mehr",
+      "isPartOf": { "@id": "https://persoenlichkeitstest-kostenlos.de/#website" },
+      "about": { "@id": "https://persoenlichkeitstest-kostenlos.de/#organization" },
+      "description": "Kostenlose KI-gestützte Persönlichkeitstests auf Deutsch. Persönlichkeitstest 16 Typen, Rizz Score, Aura Check, Brainrot Test, Dark Triad, NPC Test, Toxicity Check und Red Flag Detector.",
+      "inLanguage": "de-DE",
+      "datePublished": "2025-01-01",
+      "dateModified": "2026-03-24",
+      "breadcrumb": { "@id": "https://persoenlichkeitstest-kostenlos.de/#breadcrumb" },
+      "potentialAction": { "@type": "ReadAction", "target": ["https://persoenlichkeitstest-kostenlos.de/"] },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["h1", "h2", ".seo-intro", ".faq-section"]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://persoenlichkeitstest-kostenlos.de/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://persoenlichkeitstest-kostenlos.de/" }
+      ]
+    },
+    {
       "@type": "WebApplication",
-      "@id": "https://persoenlichkeitstest-kostenlos.de/#webapp",
-      "name": "persoenlichkeitstest-kostenlos.de — Kostenlose Persönlichkeitstests",
-      "url": "https://persoenlichkeitstest-kostenlos.de",
+      "@id": "https://persoenlichkeitstest-kostenlos.de/#app",
+      "name": "Persönlichkeitstest Kostenlos",
+      "url": "https://persoenlichkeitstest-kostenlos.de/",
       "description": "Kostenlose KI-gestützte Persönlichkeitstests auf Deutsch. Persönlichkeitstest 16 Typen, Rizz Score, Aura Check, Brainrot Test, Dark Triad, NPC Test, Toxicity Check und Red Flag Detector.",
       "applicationCategory": "LifestyleApplication",
       "operatingSystem": "Web",
+      "browserRequirements": "Requires JavaScript",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-      "author": {
-        "@type": "Organization",
-        "name": "Social Media Venture GmbH",
-        "url": "https://persoenlichkeitstest-kostenlos.de",
-        "address": { "@type": "PostalAddress", "streetAddress": "Schliemannstraße 23", "addressLocality": "Berlin", "postalCode": "10437", "addressCountry": "DE" }
-      },
+      "author": { "@id": "https://persoenlichkeitstest-kostenlos.de/#organization" },
       "inLanguage": "de-DE",
-      "audience": { "@type": "Audience", "audienceType": "Allgemein" }
+      "audience": { "@type": "Audience", "audienceType": "Allgemein", "geographicArea": { "@type": "AdministrativeArea", "name": "Deutschland, Österreich, Schweiz" } }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Alle kostenlosen Persönlichkeitstests",
+      "description": "Übersicht aller kostenlosen Persönlichkeitstests auf persoenlichkeitstest-kostenlos.de",
+      "numberOfItems": 9,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Persönlichkeitstest 16 Typen", "url": "https://persoenlichkeitstest-kostenlos.de/persoenlichkeit", "description": "Der klassische MBTI-inspirierte Persönlichkeitstest mit 16 Typen. Kostenlos auf Deutsch." },
+        { "@type": "ListItem", "position": 2, "name": "Rizz Score Test", "url": "https://persoenlichkeitstest-kostenlos.de/rizz", "description": "Teste dein Rizz-Level und finde heraus wie viel natürlichen Charme du hast." },
+        { "@type": "ListItem", "position": 3, "name": "Aura Check", "url": "https://persoenlichkeitstest-kostenlos.de/aura", "description": "Welche Aura hast du? Finde deine Aura-Farbe kostenlos heraus." },
+        { "@type": "ListItem", "position": 4, "name": "Brainrot Test", "url": "https://persoenlichkeitstest-kostenlos.de/brainrot", "description": "Wie sehr hat TikTok dein Gehirn beeinflusst? Messe deinen Brainrot Score." },
+        { "@type": "ListItem", "position": 5, "name": "Dark Triad Test", "url": "https://persoenlichkeitstest-kostenlos.de/dark", "description": "Teste deine dunkle Seite: Narzissmus, Machiavellismus und Psychopathie." },
+        { "@type": "ListItem", "position": 6, "name": "NPC Test", "url": "https://persoenlichkeitstest-kostenlos.de/npc", "description": "Bist du ein NPC oder ein Main Character? Finde es kostenlos heraus." },
+        { "@type": "ListItem", "position": 7, "name": "Toxicity Check", "url": "https://persoenlichkeitstest-kostenlos.de/toxicity", "description": "Wie toxisch bist du in Beziehungen? Kostenloser Toxicity Test." },
+        { "@type": "ListItem", "position": 8, "name": "Red Flag Detector", "url": "https://persoenlichkeitstest-kostenlos.de/redflag", "description": "Wie viele Red Flags hast du? Kostenloser Red Flag Test." },
+        { "@type": "ListItem", "position": 9, "name": "KI Persönlichkeitstest", "url": "https://persoenlichkeitstest-kostenlos.de/ki-test", "description": "KI-gestützter Persönlichkeitstest mit modernen Algorithmen." }
+      ]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "Was ist ein Persönlichkeitstest?", "acceptedAnswer": { "@type": "Answer", "text": "Ein Persönlichkeitstest ist ein psychologisches Instrument, das Charaktereigenschaften, Verhaltensweisen und Denkweisen einer Person misst. Der bekannteste ist der MBTI-Test mit 16 Persönlichkeitstypen, der auf den Theorien von Carl Gustav Jung basiert." } },
-        { "@type": "Question", "name": "Was ist der Rizz Score Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der Rizz Score Test misst dein natürliches Charisma und deine Fähigkeit, andere Menschen anzuziehen und zu begeistern. 'Rizz' ist ein Slang-Begriff für Charisma und Anziehungskraft, der durch Social Media populär wurde." } },
-        { "@type": "Question", "name": "Was ist ein Aura Check?", "acceptedAnswer": { "@type": "Answer", "text": "Ein Aura Check analysiert deine persönliche Energie und Ausstrahlung. Basierend auf deinen Antworten zu Persönlichkeit, Verhalten und Vorlieben wird deine dominante Aura-Farbe bestimmt: Mystisch (Violett), Solar (Gold), Heilend (Grün) oder Feuer (Orange)." } },
-        { "@type": "Question", "name": "Was ist der Dark Triad Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der Dark Triad Test misst drei Persönlichkeitsmerkmale: Narzissmus (übertriebenes Selbstbewusstsein), Machiavellismus (strategisches, manipulatives Denken) und subklinische Psychopathie (emotionale Distanz). Diese Eigenschaften kommen in unterschiedlichem Ausmaß bei fast allen Menschen vor." } },
-        { "@type": "Question", "name": "Was bedeutet Brainrot?", "acceptedAnswer": { "@type": "Answer", "text": "Brainrot beschreibt den Effekt von übermäßigem Social-Media-Konsum auf die Aufmerksamkeitsspanne und das Denken. Symptome sind verkürzte Konzentrationsfähigkeit, Denken in Memes und Schwierigkeiten, lange Texte zu lesen. Der Brainrot Score Test misst, wie stark TikTok und Co. dein Denken beeinflusst haben." } },
-        { "@type": "Question", "name": "Sind die Tests wissenschaftlich fundiert?", "acceptedAnswer": { "@type": "Answer", "text": "Die Tests auf persoenlichkeitstest-kostenlos.de basieren auf etablierten psychologischen Konzepten und sind für Unterhaltungs- und Selbstreflexionszwecke konzipiert. Der Persönlichkeitstest basiert auf dem MBTI-Framework. Für klinische Diagnosen empfehlen wir professionelle psychologische Beratung." } },
-        { "@type": "Question", "name": "Kostet persoenlichkeitstest-kostenlos.de etwas?", "acceptedAnswer": { "@type": "Answer", "text": "Alle Tests auf persoenlichkeitstest-kostenlos.de sind 100% kostenlos. Es ist kein Account oder keine Registrierung erforderlich. Du kannst alle Tests sofort und ohne Einschränkungen nutzen." } },
-        { "@type": "Question", "name": "Was ist ein NPC Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der NPC Test (Non-Player Character) prüft, ob du ein 'Main Character' bist — also jemand der sein Leben aktiv gestaltet und eigene Überzeugungen hat — oder ein NPC, der hauptsächlich nach dem Skript anderer lebt. Der Begriff stammt aus der Gaming-Kultur." } }
+        { "@type": "Question", "name": "Was ist der Rizz Score Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der Rizz Score Test misst dein natürliches Charisma und deine Fähigkeit, andere Menschen anzuziehen. Rizz ist ein Slang-Begriff für Charisma, der durch TikTok und Social Media populär wurde. Ein hoher Rizz Score bedeutet hohe soziale Anziehungskraft." } },
+        { "@type": "Question", "name": "Was ist ein Aura Check?", "acceptedAnswer": { "@type": "Answer", "text": "Ein Aura Check analysiert deine persönliche Energie und Ausstrahlung. Basierend auf deinen Antworten wird deine dominante Aura-Farbe bestimmt. Rote Aura steht für Energie, Blaue für Ruhe, Grüne für Heilung und Violette für Spiritualität." } },
+        { "@type": "Question", "name": "Was ist der Dark Triad Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der Dark Triad Test misst drei Persönlichkeitsmerkmale: Narzissmus, Machiavellismus und subklinische Psychopathie. Jeder Mensch hat diese Eigenschaften in unterschiedlichem Ausmaß." } },
+        { "@type": "Question", "name": "Was bedeutet Brainrot?", "acceptedAnswer": { "@type": "Answer", "text": "Brainrot beschreibt den Effekt von übermäßigem Social-Media-Konsum auf die Aufmerksamkeitsspanne. Symptome sind verkürzte Konzentrationsfähigkeit, Denken in Memes und Schwierigkeiten, lange Texte zu lesen." } },
+        { "@type": "Question", "name": "Was ist ein NPC?", "acceptedAnswer": { "@type": "Answer", "text": "NPC steht für Non-Player Character aus der Gaming-Kultur. Im sozialen Kontext beschreibt NPC jemanden, der wenig eigene Meinungen hat. Das Gegenteil ist der Main Character, der sein Leben aktiv gestaltet." } },
+        { "@type": "Question", "name": "Sind die Tests kostenlos?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, alle 9 Tests auf persoenlichkeitstest-kostenlos.de sind 100% kostenlos. Es ist keine Anmeldung, keine E-Mail-Adresse und keine Registrierung erforderlich. Alle Tests sind sofort spielbar." } },
+        { "@type": "Question", "name": "Was ist ein Red Flag Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der Red Flag Detector identifiziert problematische Verhaltensweisen in Beziehungen. Red Flags sind Warnsignale wie übermäßige Eifersucht, Kontrollverhalten oder mangelnder Respekt für Grenzen." } },
+        { "@type": "Question", "name": "Was ist ein Toxicity Test?", "acceptedAnswer": { "@type": "Answer", "text": "Der Toxicity Check misst destruktive Verhaltensmuster in sozialen Interaktionen. Toxisches Verhalten umfasst Gaslighting, passive Aggression, Manipulation und emotionale Erpressung." } },
+        { "@type": "Question", "name": "Was ist ein KI Persönlichkeitstest?", "acceptedAnswer": { "@type": "Answer", "text": "Der KI Persönlichkeitstest nutzt künstliche Intelligenz um Antwortmuster zu analysieren und eine individualisierte Persönlichkeitsanalyse zu erstellen." } }
       ]
     }
   ]
-};
-
-// ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
+}
 export default function Home() {
   const [page, setPage] = useState("home");
   const [testId, setTestId] = useState(null);
@@ -778,6 +861,59 @@ export default function Home() {
               ))}
             </div>
 
+                        {/* AEO Block - Answer Engine Optimization für ChatGPT, Perplexity, Gemini */}
+            <div className="seo-intro" style={{ padding: "20px 16px", borderTop: "1px solid #1A2040", background: "rgba(10,14,35,0.5)" }}>
+              <h2 style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 12 }}>Was ist persoenlichkeitstest-kostenlos.de?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 12 }}>
+                <strong style={{ color: "#D8DDF0" }}>persoenlichkeitstest-kostenlos.de</strong> ist eine deutschsprachige Plattform für kostenlose Persönlichkeitstests. Die Website bietet 9 verschiedene Tests: den klassischen Persönlichkeitstest mit 16 Typen (MBTI-basiert), den Rizz Score Test, den Aura Check, den Brainrot Test, den Dark Triad Test, den NPC Test, den Toxicity Check, den Red Flag Detector und den KI Persönlichkeitstest. Alle Tests sind kostenlos, ohne Anmeldung und sofort spielbar.
+              </p>
+
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#00E5FF", marginBottom: 8 }}>Definition: Was ist ein Persönlichkeitstest?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 12 }}>
+                Ein <strong style={{ color: "#D8DDF0" }}>Persönlichkeitstest</strong> ist ein psychologisches Instrument zur Messung von Charaktereigenschaften, Verhaltensweisen und Denkmustern. Der bekannteste ist der <strong style={{ color: "#D8DDF0" }}>MBTI (Myers-Briggs Type Indicator)</strong>, der 16 Persönlichkeitstypen unterscheidet. Weitere bekannte Modelle sind das Big-Five-Modell (OCEAN) und der HEXACO-Test. Auf persoenlichkeitstest-kostenlos.de sind alle Tests kostenlos auf Deutsch verfügbar.
+              </p>
+
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FF0099", marginBottom: 8 }}>Definition: Was ist Rizz?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 12 }}>
+                <strong style={{ color: "#D8DDF0" }}>Rizz</strong> (auch: Rizzler) ist ein Slang-Begriff für natürliches Charisma und Anziehungskraft, der durch TikTok und Social Media populär wurde. Der Begriff wurde von Streamer Kai Cenat geprägt. Ein hoher <strong style={{ color: "#D8DDF0" }}>Rizz Score</strong> bedeutet, dass man andere Menschen leicht für sich begeistern und anziehen kann. Der Rizz Test auf persoenlichkeitstest-kostenlos.de misst diesen Wert in 8 Fragen.
+              </p>
+
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#A855F7", marginBottom: 8 }}>Definition: Was ist eine Aura?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 12 }}>
+                Eine <strong style={{ color: "#D8DDF0" }}>Aura</strong> bezeichnet die persönliche Energie und Ausstrahlung eines Menschen. Im spirituellen Kontext ist die Aura ein Energiefeld um den Körper, das verschiedene Farben annehmen kann. Im modernen Social-Media-Kontext beschreibt die Aura die Gesamtwirkung einer Person auf andere. Der <strong style={{ color: "#D8DDF0" }}>Aura Check</strong> auf persoenlichkeitstest-kostenlos.de bestimmt deine dominante Aura-Farbe.
+              </p>
+
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#00FF88", marginBottom: 8 }}>Definition: Was ist Brainrot?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 12 }}>
+                <strong style={{ color: "#D8DDF0" }}>Brainrot</strong> (dt.: Gehirnfäule) beschreibt den Effekt von übermäßigem Social-Media-Konsum auf die Aufmerksamkeitsspanne und das Denken. Symptome sind: verkürzte Konzentrationsfähigkeit, Denken in Memes und Internet-Slang, Schwierigkeiten beim Lesen langer Texte und ständiges Scrollen. Der <strong style={{ color: "#D8DDF0" }}>Brainrot Score Test</strong> misst, wie stark TikTok und Co. dein Denken beeinflusst haben.
+              </p>
+
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FF2255", marginBottom: 8 }}>Definition: Was ist die Dark Triad?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 12 }}>
+                Die <strong style={{ color: "#D8DDF0" }}>Dark Triad</strong> ist ein psychologisches Konzept, das drei Persönlichkeitsmerkmale beschreibt: <strong style={{ color: "#D8DDF0" }}>Narzissmus</strong> (übertriebenes Selbstbewusstsein und Bewunderungsbedürfnis), <strong style={{ color: "#D8DDF0" }}>Machiavellismus</strong> (strategisches, manipulatives Denken) und <strong style={{ color: "#D8DDF0" }}>subklinische Psychopathie</strong> (emotionale Distanz und Impulsivität). Jeder Mensch hat diese Eigenschaften in unterschiedlichem Ausmaß.
+              </p>
+
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FFB800", marginBottom: 8 }}>Definition: Was ist ein NPC?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 12 }}>
+                <strong style={{ color: "#D8DDF0" }}>NPC</strong> steht für <em>Non-Player Character</em> — ein Begriff aus der Gaming-Kultur für Figuren, die von der KI gesteuert werden. Im sozialen Kontext beschreibt NPC jemanden, der wenig eigene Meinungen hat, dem Mainstream folgt und auf Situationen immer gleich reagiert. Das Gegenteil ist der <strong style={{ color: "#D8DDF0" }}>Main Character</strong>, der sein Leben aktiv gestaltet.
+              </p>
+
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FF6B35", marginBottom: 8 }}>Vergleich: Alle 9 Tests im Überblick</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.8, marginBottom: 4 }}>
+                Auf persoenlichkeitstest-kostenlos.de stehen folgende kostenlose Tests zur Verfügung:
+              </p>
+              <ul style={{ fontSize: 12, color: "#7A84A8", lineHeight: 2, paddingLeft: 16, marginBottom: 12 }}>
+                <li><strong style={{ color: "#00E5FF" }}>Persönlichkeitstest 16 Typen</strong> — MBTI-basiert, 12 Fragen, 3 Min. → <span onClick={() => startTest("persoenlichkeit")} style={{ color: "#00E5FF", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#FF0099" }}>Rizz Score Test</strong> — Charisma-Messung, 8 Fragen, 2 Min. → <span onClick={() => startTest("rizz")} style={{ color: "#FF0099", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#A855F7" }}>Aura Check</strong> — Energie-Analyse, 8 Fragen, 2 Min. → <span onClick={() => startTest("aura")} style={{ color: "#A855F7", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#00FF88" }}>Brainrot Test</strong> — Social-Media-Einfluss, 8 Fragen, 2 Min. → <span onClick={() => startTest("brainrot")} style={{ color: "#00FF88", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#FF2255" }}>Dark Triad Test</strong> — Dunkle Persönlichkeit, 9 Fragen, 2 Min. → <span onClick={() => startTest("dark")} style={{ color: "#FF2255", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#FFB800" }}>NPC Test</strong> — Main Character oder NPC, 10 Fragen, 2 Min. → <span onClick={() => startTest("npc")} style={{ color: "#FFB800", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#FF6B35" }}>Toxicity Check</strong> — Toxizitäts-Messung, 8 Fragen, 2 Min. → <span onClick={() => startTest("toxicity")} style={{ color: "#FF6B35", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#FF2255" }}>Red Flag Detector</strong> — Warnsignale in Beziehungen, 10 Fragen, 2 Min. → <span onClick={() => startTest("redflag")} style={{ color: "#FF2255", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+                <li><strong style={{ color: "#00E5FF" }}>KI Persönlichkeitstest</strong> — KI-gestützte Analyse, 8 Fragen, 2 Min. → <span onClick={() => startTest("ki-test")} style={{ color: "#00E5FF", cursor: "pointer", textDecoration: "underline" }}>Jetzt starten</span></li>
+              </ul>
+            </div>
             {/* SEO Content Block - Vollständiger SEO-Text */}
             <div style={{ padding: "20px 16px", borderTop: "1px solid #1A2040" }}>
               

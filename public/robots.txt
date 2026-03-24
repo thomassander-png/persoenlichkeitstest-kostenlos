@@ -1,4 +1,66 @@
+# robots.txt für persoenlichkeitstest-kostenlos.de
+# Optimiert für KI-Crawler (ChatGPT, Perplexity, Gemini, Claude)
+
+# Standard-Crawler
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
+# Google (max-snippet für KI-Snippets erlauben)
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+# Google Extended (für Gemini/Bard Training)
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+
+# OpenAI Browsing
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Microsoft Copilot
+User-agent: Bingbot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl (für LLM-Training)
+User-agent: CCBot
+Allow: /
+
+# Sitemap
 Sitemap: https://persoenlichkeitstest-kostenlos.de/sitemap.xml
+
+# LLM-Dateien
+# llms.txt: https://persoenlichkeitstest-kostenlos.de/llms.txt
+# llms-full.txt: https://persoenlichkeitstest-kostenlos.de/llms-full.txt
