@@ -31,8 +31,8 @@ export default function App({ Component, pageProps }) {
         <meta property="og:site_name" content="persoenlichkeitstest-kostenlos.de" />
         <meta property="og:locale" content="de_DE" />
         {/* Twitter */}
-        <meta name="twitter:site" content="@findurapp" />
-        <meta name="twitter:creator" content="@findurapp" />
+        <meta name="twitter:site" content="@persoenlichkeitstests" />
+        <meta name="twitter:creator" content="@persoenlichkeitstests" />
       </Head>
       <Component {...pageProps} />
     </>
