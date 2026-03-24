@@ -15,7 +15,7 @@ export default function Datenschutz() {
         <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid #1A2040", marginBottom: 32 }}>
           <Link href="/" style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
             <span style={{ fontSize: 16, fontWeight: 900, color: "#00E5FF" }}>⚡</span>
-            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>FINDUR.APP</span>
+            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>PERSÖNLICHKEITSTEST</span>
           </Link>
           <Link href="/" style={{ fontSize: 11, color: "#7A84A8", textDecoration: "none" }}>← Zurück</Link>
         </nav>
@@ -29,7 +29,7 @@ export default function Datenschutz() {
             Social Media Venture GmbH<br />
             Schliemannstraße 23, 10437 Berlin<br />
             Telefon: +49 30 959 988 700<br />
-            E-Mail: <a href="mailto:info@findur.app" style={{ color: "#00E5FF", textDecoration: "none" }}>info@findur.app</a>
+            E-Mail: <a href="mailto:info@persoenlichkeitstest-kostenlos.de" style={{ color: "#00E5FF", textDecoration: "none" }}>info@persoenlichkeitstest-kostenlos.de</a>
           </p>
         </section>
 
@@ -80,7 +80,7 @@ export default function Datenschutz() {
         <section style={{ marginBottom: 28 }}>
           <h2 style={{ fontSize: 16, fontWeight: 700, color: "#00E5FF", marginBottom: 12 }}>7. E-Mail-Kontakt und Newsletter</h2>
           <p style={{ fontSize: 13, color: "#7A84A8", lineHeight: 1.7 }}>
-            Wenn Sie uns per E-Mail kontaktieren oder sich für unseren Newsletter anmelden, werden die von Ihnen übermittelten Daten (E-Mail-Adresse, ggf. Name) zur Bearbeitung Ihrer Anfrage bzw. zur Zusendung des Newsletters verarbeitet. Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) oder zur Erfüllung eines Vertrags (Art. 6 Abs. 1 lit. b DSGVO). Sie können Ihre Einwilligung zum Newsletter-Empfang jederzeit widerrufen, indem Sie auf den Abmelde-Link in der jeweiligen E-Mail klicken oder uns unter <a href="mailto:info@findur.app" style={{ color: "#00E5FF", textDecoration: "none" }}>info@findur.app</a> kontaktieren.
+            Wenn Sie uns per E-Mail kontaktieren oder sich für unseren Newsletter anmelden, werden die von Ihnen übermittelten Daten (E-Mail-Adresse, ggf. Name) zur Bearbeitung Ihrer Anfrage bzw. zur Zusendung des Newsletters verarbeitet. Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) oder zur Erfüllung eines Vertrags (Art. 6 Abs. 1 lit. b DSGVO). Sie können Ihre Einwilligung zum Newsletter-Empfang jederzeit widerrufen, indem Sie auf den Abmelde-Link in der jeweiligen E-Mail klicken oder uns unter <a href="mailto:info@persoenlichkeitstest-kostenlos.de" style={{ color: "#00E5FF", textDecoration: "none" }}>info@persoenlichkeitstest-kostenlos.de</a> kontaktieren.
           </p>
         </section>
 
@@ -106,7 +106,7 @@ export default function Datenschutz() {
             ))}
           </div>
           <p style={{ fontSize: 13, color: "#7A84A8", lineHeight: 1.7, marginTop: 12 }}>
-            Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:info@findur.app" style={{ color: "#00E5FF", textDecoration: "none" }}>info@findur.app</a><br /><br />
+            Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:info@persoenlichkeitstest-kostenlos.de" style={{ color: "#00E5FF", textDecoration: "none" }}>info@persoenlichkeitstest-kostenlos.de</a><br /><br />
             Darüber hinaus haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Die zuständige Aufsichtsbehörde ist die Berliner Beauftragte für Datenschutz und Informationsfreiheit, Friedrichstr. 219, 10969 Berlin.
           </p>
         </section>

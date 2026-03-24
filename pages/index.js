@@ -686,23 +686,27 @@ export default function Home() {
       <Script id="schema-org" type="application/ld+json" strategy="beforeInteractive">{JSON.stringify(schemaData)}</Script>
 
       <Head>
-        <title>Kostenloser Persönlichkeitstest 2026 | KI-Analyse | persoenlichkeitstest-kostenlos.de</title>
+        <title>Kostenloser Persönlichkeitstest 2026 | KI-gestützt | persoenlichkeitstest-kostenlos.de</title>
         <meta name="description" content="Mach den kostenlosen Persönlichkeitstest 2026 auf persoenlichkeitstest-kostenlos.de. 8 Tests: 16 Persönlichkeitstypen, Rizz Score, Aura Check, Brainrot Test, Dark Triad, NPC Test. Sofortiges Ergebnis, kein Account nötig." />
-        <meta name="keywords" content="Persönlichkeitstest kostenlos, Rizz Test, Aura Check, Brainrot Test, Dark Triad Test, NPC Test, Toxicity Test, Red Flag Test, 16 Persönlichkeitstypen, MBTI Test Deutsch" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="persönlichkeitstest kostenlos, persönlichkeitstest online, 16 persönlichkeitstypen test, mbti test kostenlos deutsch, rizz test, aura check, brainrot test, dark triad test, npc test, toxicity test, red flag test" />
         <link rel="canonical" href="https://persoenlichkeitstest-kostenlos.de/" />
         {/* Open Graph */}
-        <meta property="og:title" content="Kostenloser Persönlichkeitstest 2026 | persoenlichkeitstest-kostenlos.de" />
+        <meta property="og:title" content="Kostenloser Persönlichkeitstest 2026 | KI-gestützt | persoenlichkeitstest-kostenlos.de" />
         <meta property="og:description" content="8 kostenlose Persönlichkeitstests: Persönlichkeitstest, Rizz Score, Aura Check, Brainrot Score und mehr. KI-analysiert, sofortiges Ergebnis." />
-        <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de" />
+        <meta property="og:url" content="https://persoenlichkeitstest-kostenlos.de/" />
         <meta property="og:type" content="website" />
-        <meta property="og:locale" content="de_DE" />
+        <meta property="og:image" content="https://persoenlichkeitstest-kostenlos.de/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Kostenloser Persönlichkeitstest 2026 — 8 Tests, sofortiges Ergebnis" />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Kostenloser Persönlichkeitstest 2026 | persoenlichkeitstest-kostenlos.de" />
         <meta name="twitter:description" content="Wer bist du wirklich? 8 kostenlose Tests: Persönlichkeit, Rizz, Aura, Brainrot und mehr." />
+        <meta name="twitter:image" content="https://persoenlichkeitstest-kostenlos.de/og-image.png" />
+        {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
       </Head>
 
@@ -711,7 +715,7 @@ export default function Home() {
         <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: "1px solid #1A2040" }}>
           <div onClick={goHome} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ fontSize: 16, fontWeight: 900, color: "#00E5FF" }}>⚡</span>
-            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>FINDUR.APP</span>
+            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>PERSÖNLICHKEITSTEST</span>
           </div>
           <span style={{ fontSize: 10, color: "#00E5FF", background: "#00E5FF15", padding: "3px 8px", borderRadius: 20, fontWeight: 700 }}>KOSTENLOS</span>
         </nav>
@@ -759,41 +763,107 @@ export default function Home() {
               ))}
             </div>
 
-            {/* SEO Content Block */}
+            {/* SEO Content Block - Vollständiger SEO-Text */}
             <div style={{ padding: "20px 16px", borderTop: "1px solid #1A2040" }}>
-              <h2 style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 10 }}>Kostenloser Persönlichkeitstest 2026</h2>
+              
+              {/* Persönlichkeitstest */}
+              <h2 style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 10 }}>Kostenloser Persönlichkeitstest 2026 — 16 Typen</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Entdecke deinen Persönlichkeitstyp mit dem kostenlosen KI-Persönlichkeitstest auf persoenlichkeitstest-kostenlos.de. Basierend auf dem MBTI-Framework (Myers-Briggs Type Indicator) und den Theorien von Carl Gustav Jung analysiert unser Test in nur 12 Fragen, welcher der 16 Persönlichkeitstypen du bist. Ob Architekt (INTJ), Mediator (INFP), Entertainer (ESFP) oder Kommandeur (ENTJ) — dein Ergebnis zeigt dir deine Stärken, Schwächen und Karrierepfade.
+              </p>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Der persönlichkeitstest kostenlos online ist wissenschaftlich fundiert und basiert auf vier Dimensionen: Introversion vs. Extraversion, Intuition vs. Sensorik, Fühlen vs. Denken und Wahrnehmen vs. Urteilen. Diese vier Achsen ergeben 16 einzigartige Persönlichkeitstypen, die jeweils unterschiedliche Stärken, Kommunikationsstile und Lebenswege beschreiben.
+              </p>
               <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
-                Entdecke deinen Persönlichkeitstyp mit dem kostenlosen KI-Persönlichkeitstest auf persoenlichkeitstest-kostenlos.de. Basierend auf den 16 Persönlichkeitstypen (MBTI) analysiert unser Test in nur 12 Fragen, ob du ein Architekt (INTJ), Mediator (INFP), Entertainer (ESFP) oder einer der anderen 13 Typen bist. Kein Account nötig, 100% kostenlos, sofortiges Ergebnis.
+                Kein Account nötig, 100% kostenlos, sofortiges Ergebnis. Der 16 Persönlichkeitstypen Test dauert nur 3 Minuten und liefert dir eine detaillierte Analyse deines Persönlichkeitstyps inklusive berühmter Persönlichkeiten mit demselben Typ.
               </p>
 
-              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#fff", marginBottom: 8 }}>Rizz Score Test — Wie viel Charisma hast du?</h2>
+              {/* Rizz Score */}
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FF0099", marginBottom: 8 }}>Rizz Score Test — Wie viel Charisma hast du?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Der Rizz Score Test misst dein natürliches Charisma und deine soziale Anziehungskraft. "Rizz" — ein Slang-Begriff für Charisma, der durch Social Media und besonders TikTok populär wurde — beschreibt die Fähigkeit, andere mühelos zu begeistern und anzuziehen. In 10 Fragen analysiert der rizz test kostenlos deine Körpersprache, Selbstwahrnehmung, Kommunikationsstil und sozialen Fähigkeiten.
+              </p>
               <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
-                Der Rizz Score Test misst dein natürliches Charisma und deine soziale Anziehungskraft. "Rizz" — abgeleitet vom englischen "charisma" — beschreibt die Fähigkeit, andere mühelos zu begeistern. In 10 Fragen analysiert der Test deine Körpersprache, Selbstwahrnehmung und sozialen Fähigkeiten.
+                Das Ergebnis reicht von "Kein Rizz" bis "Unreal Rizz" und gibt dir konkrete Hinweise, wie du dein Charisma verbessern kannst. Verwandte Tests: <span onClick={() => startTest("aura")} style={{ color: "#A855F7", cursor: "pointer", textDecoration: "underline" }}>Aura Check</span>, <span onClick={() => startTest("toxicity")} style={{ color: "#FF6B35", cursor: "pointer", textDecoration: "underline" }}>Toxicity Check</span>.
               </p>
 
-              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#fff", marginBottom: 8 }}>Aura Check — Welche Energie strahlst du aus?</h2>
+              {/* Aura Check */}
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#A855F7", marginBottom: 8 }}>Aura Check — Welche Energie strahlst du aus?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Der Aura Check analysiert deine persönliche Energie und Ausstrahlung. Basierend auf deinen Antworten zu Persönlichkeit, Verhalten und Vorlieben wird deine dominante Aura-Farbe bestimmt. Mögliche Aura-Typen sind: Mystische Aura (Violett) für tiefgründige, spirituelle Menschen; Solare Aura (Gold) für energiegeladene, optimistische Persönlichkeiten; Heilende Aura (Grün) für empathische, fürsorgliche Menschen; und Feuer-Aura (Orange) für leidenschaftliche, kreative Naturen.
+              </p>
               <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
-                Der Aura Check analysiert deine persönliche Energie und Ausstrahlung. Basierend auf deinen Antworten wird deine dominante Aura bestimmt: Mystische Aura (Violett), Solare Aura (Gold), Heilende Aura (Grün) oder Feuer-Aura (Orange). Jede Aura-Farbe steht für einzigartige Stärken und Energien.
+                Der aura farbe test kostenlos dauert nur 2 Minuten und gibt dir einen tiefen Einblick in deine Energie und Ausstrahlung. Verwandte Tests: <span onClick={() => startTest("rizz")} style={{ color: "#FF0099", cursor: "pointer", textDecoration: "underline" }}>Rizz Score</span>, <span onClick={() => startTest("persoenlichkeit")} style={{ color: "#00E5FF", cursor: "pointer", textDecoration: "underline" }}>Persönlichkeitstest</span>.
               </p>
 
-              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#fff", marginBottom: 8 }}>Dark Triad Test — Narzissmus, Machiavellismus, Psychopathie</h2>
+              {/* Brainrot */}
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#00FF88", marginBottom: 8 }}>Brainrot Score Test — Wie kaputt ist dein Gehirn?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Brainrot beschreibt den Effekt von übermäßigem Social-Media-Konsum — besonders TikTok und Instagram — auf die Aufmerksamkeitsspanne und das Denken. Symptome sind verkürzte Konzentrationsfähigkeit, Denken in Memes und Schwierigkeiten, lange Texte zu lesen. Der brainrot test kostenlos misst, wie stark dein Gehirn von der digitalen Reizüberflutung beeinflusst wurde.
+              </p>
               <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
-                Die Dunkle Triade ist ein psychologisches Konzept, das drei Persönlichkeitsmerkmale beschreibt: Narzissmus (übertriebenes Selbstbewusstsein), Machiavellismus (strategisches Denken) und subklinische Psychopathie (emotionale Distanz). Diese Eigenschaften kommen in unterschiedlichem Ausmaß bei fast allen Menschen vor und sind kein klinischer Befund.
+                Das Ergebnis reicht von "Gesundes Gehirn" bis "Terminaler Brainrot" und gibt dir einen humorvollen, aber aufschlussreichen Blick auf deine digitalen Gewohnheiten. Verwandte Tests: <span onClick={() => startTest("npc")} style={{ color: "#FFB800", cursor: "pointer", textDecoration: "underline" }}>NPC Test</span>, <span onClick={() => startTest("rizz")} style={{ color: "#FF0099", cursor: "pointer", textDecoration: "underline" }}>Rizz Score</span>.
+              </p>
+
+              {/* Dark Triad */}
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FF2255", marginBottom: 8 }}>Dark Triad Test — Narzissmus, Machiavellismus, Psychopathie</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Die Dunkle Triade ist ein psychologisches Konzept, das drei Persönlichkeitsmerkmale beschreibt: Narzissmus (übertriebenes Selbstbewusstsein und Bewunderungsbedürfnis), Machiavellismus (strategisches, manipulatives Denken und Zynismus) und subklinische Psychopathie (emotionale Distanz und Impulsivität). Diese Eigenschaften kommen in unterschiedlichem Ausmaß bei fast allen Menschen vor.
+              </p>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
+                Der dark triad test deutsch ist kein klinisches Diagnosewerkzeug, sondern dient der Selbstreflexion. Er zeigt dir, welche dieser drei Eigenschaften bei dir stärker ausgeprägt sind. Verwandte Tests: <span onClick={() => startTest("toxicity")} style={{ color: "#FF6B35", cursor: "pointer", textDecoration: "underline" }}>Toxicity Check</span>, <span onClick={() => startTest("redflag")} style={{ color: "#FF2255", cursor: "pointer", textDecoration: "underline" }}>Red Flag Detector</span>.
+              </p>
+
+              {/* NPC Test */}
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FFB800", marginBottom: 8 }}>NPC Test — Main Character oder Hintergrundstatist?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Der NPC Test (Non-Player Character) ist ein viraler Internet-Trend, der die Frage stellt: Lebst du dein Leben als Hauptfigur (Main Character) oder als Hintergrundstatist (NPC)? Main Characters gestalten ihr Leben aktiv, treffen eigene Entscheidungen und folgen ihren eigenen Werten. NPCs hingegen reagieren hauptsächlich auf andere und folgen sozialen Skripten.
+              </p>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
+                Der bin ich ein npc test analysiert deine Entscheidungsfindung, Eigeninitiative und Lebenseinstellung in 10 Fragen. Verwandte Tests: <span onClick={() => startTest("brainrot")} style={{ color: "#00FF88", cursor: "pointer", textDecoration: "underline" }}>Brainrot Score</span>, <span onClick={() => startTest("persoenlichkeit")} style={{ color: "#00E5FF", cursor: "pointer", textDecoration: "underline" }}>Persönlichkeitstest</span>.
+              </p>
+
+              {/* Toxicity Check */}
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FF6B35", marginBottom: 8 }}>Toxicity Check — Wie toxisch bist du wirklich?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Der Toxicity Check misst, wie toxisch dein Verhalten in Beziehungen und sozialen Situationen ist. Toxisches Verhalten umfasst Manipulation, übermäßige Kritik, Passiv-Aggressivität, Eifersucht und mangelnde Empathie. Der wie toxisch bin ich test gibt dir einen ehrlichen Einblick in deine Verhaltensweisen.
+              </p>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 12 }}>
+                Das Ergebnis reicht von "Wholesome" bis "Kritisch toxisch" und gibt dir konkrete Hinweise, welche Verhaltensweisen du in Beziehungen verbessern könntest. Verwandte Tests: <span onClick={() => startTest("redflag")} style={{ color: "#FF2255", cursor: "pointer", textDecoration: "underline" }}>Red Flag Detector</span>, <span onClick={() => startTest("dark")} style={{ color: "#FF2255", cursor: "pointer", textDecoration: "underline" }}>Dark Triad Test</span>.
+              </p>
+
+              {/* Red Flag */}
+              <h2 style={{ fontSize: 15, fontWeight: 800, color: "#FF2255", marginBottom: 8 }}>Red Flag Test — Wie viele Red Flags hast du?</h2>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 8 }}>
+                Der Red Flag Test analysiert dein Verhalten in Beziehungen und zeigt dir, welche potenziell problematischen Verhaltensweisen (Red Flags) du haben könntest. Red Flags sind Warnsignale in Beziehungen, die auf ungesunde Muster hinweisen: Eifersucht, Kontrollverhalten, mangelnde Kommunikation oder emotionale Unreife.
+              </p>
+              <p style={{ fontSize: 12, color: "#7A84A8", lineHeight: 1.7, marginBottom: 16 }}>
+                Der red flag detector zeigt dir in 10 Fragen, wie viele Red Flags du in Beziehungen mitbringst — von "Grüne Flagge" bis "Rote Flagge". Verwandte Tests: <span onClick={() => startTest("toxicity")} style={{ color: "#FF6B35", cursor: "pointer", textDecoration: "underline" }}>Toxicity Check</span>, <span onClick={() => startTest("dark")} style={{ color: "#FF2255", cursor: "pointer", textDecoration: "underline" }}>Dark Triad Test</span>.
               </p>
 
               {/* FAQ Section */}
-              <h2 style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 12, marginTop: 20 }}>Häufige Fragen</h2>
+              <h2 style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 12, marginTop: 8 }}>Häufig gestellte Fragen</h2>
               {[
-                { q: "Sind die Tests kostenlos?", a: "Ja, alle 8 Tests auf persoenlichkeitstest-kostenlos.de sind 100% kostenlos. Kein Account, keine Registrierung, kein Abo." },
-                { q: "Wie lange dauern die Tests?", a: "Die meisten Tests dauern 2-3 Minuten. Der Persönlichkeitstest hat 12 Fragen, alle anderen Tests haben 8-10 Fragen." },
-                { q: "Sind die Ergebnisse wissenschaftlich?", a: "Die Tests basieren auf etablierten psychologischen Konzepten (MBTI, Dark Triad) und sind für Selbstreflexion und Unterhaltung konzipiert. Für klinische Diagnosen empfehlen wir professionelle Beratung." },
+                { q: "Sind die Tests kostenlos?", a: "Ja, alle 8 Tests auf persoenlichkeitstest-kostenlos.de sind 100% kostenlos. Kein Account, keine Registrierung, kein Abo — jetzt und für immer." },
+                { q: "Wie lange dauern die Tests?", a: "Die meisten Tests dauern 2-3 Minuten. Der Persönlichkeitstest hat 12 Fragen (ca. 3 Min.), alle anderen Tests haben 8-10 Fragen (ca. 2 Min.)." },
+                { q: "Sind die Ergebnisse wissenschaftlich fundiert?", a: "Die Tests basieren auf etablierten psychologischen Konzepten (MBTI, Dark Triad) und sind für Selbstreflexion und Unterhaltung konzipiert. Für klinische Diagnosen empfehlen wir professionelle psychologische Beratung." },
                 { q: "Werden meine Daten gespeichert?", a: "Nein. Die Tests laufen vollständig im Browser. Es werden keine persönlichen Daten gespeichert oder weitergegeben. Details in unserer Datenschutzerklärung." },
+                { q: "Was ist der MBTI Test?", a: "Der MBTI (Myers-Briggs Type Indicator) ist eines der bekanntesten Persönlichkeitsmodelle weltweit. Er unterscheidet 16 Persönlichkeitstypen basierend auf vier Dimensionen: Extraversion/Introversion, Intuition/Sensorik, Denken/Fühlen und Urteilen/Wahrnehmen." },
+                { q: "Was bedeutet Rizz?", a: "Rizz ist ein Slang-Begriff für Charisma und natürliche Anziehungskraft, der durch Social Media populär wurde. Ein hoher Rizz Score bedeutet, dass du andere Menschen leicht für dich begeistern und anziehen kannst." },
               ].map((faq, i) => (
                 <div key={i} style={{ marginBottom: 10, background: "rgba(22,28,53,0.5)", borderRadius: 10, padding: "10px 12px" }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: "#00E5FF", marginBottom: 4 }}>{faq.q}</div>
                   <div style={{ fontSize: 11, color: "#7A84A8", lineHeight: 1.6 }}>{faq.a}</div>
                 </div>
               ))}
+
+              {/* Organization Info */}
+              <div style={{ marginTop: 16, padding: "12px", background: "rgba(22,28,53,0.3)", borderRadius: 10, border: "1px solid #1A2040" }}>
+                <div style={{ fontSize: 10, color: "#4A5470", lineHeight: 1.6 }}>
+                  <strong style={{ color: "#7A84A8" }}>Social Media Venture GmbH</strong> · Schliemannstraße 23, 10437 Berlin, Deutschland · 
+                  <a href="mailto:info@persoenlichkeitstest-kostenlos.de" style={{ color: "#00E5FF", textDecoration: "none" }}> info@persoenlichkeitstest-kostenlos.de</a>
+                </div>
+              </div>
             </div>
 
             {/* Footer */}

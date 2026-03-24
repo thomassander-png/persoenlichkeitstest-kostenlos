@@ -15,7 +15,7 @@ export default function Impressum() {
         <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid #1A2040", marginBottom: 32 }}>
           <Link href="/" style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
             <span style={{ fontSize: 16, fontWeight: 900, color: "#00E5FF" }}>⚡</span>
-            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>FINDUR.APP</span>
+            <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: 1 }}>PERSÖNLICHKEITSTEST</span>
           </Link>
           <Link href="/" style={{ fontSize: 11, color: "#7A84A8", textDecoration: "none" }}>← Zurück</Link>
         </nav>
@@ -52,7 +52,7 @@ export default function Impressum() {
           <h2 style={{ fontSize: 16, fontWeight: 700, color: "#00E5FF", marginBottom: 12 }}>Kontakt</h2>
           <p style={{ fontSize: 14, color: "#D8DDF0", lineHeight: 1.8, margin: 0 }}>
             Telefon: +49 30 959 988 700<br />
-            E-Mail: <a href="mailto:info@findur.app" style={{ color: "#00E5FF", textDecoration: "none" }}>info@findur.app</a>
+            E-Mail: <a href="mailto:info@persoenlichkeitstest-kostenlos.de" style={{ color: "#00E5FF", textDecoration: "none" }}>info@persoenlichkeitstest-kostenlos.de</a>
           </p>
         </section>
 
