@@ -848,6 +848,20 @@ function ContentGenerator() {
                 width:"100%",background:"linear-gradient(135deg,#00FF88,#00E5FF)",color:"#000",
                 border:"none",borderRadius:12,padding:"14px",fontSize:14,fontWeight:800,cursor:"pointer",marginTop:4
               }}>⬇️ Alle 4 Slides als PNG downloaden</button>
+
+              {/* Caption für diese Slides */}
+              <div style={{marginTop:16,background:"rgba(22,28,53,0.7)",borderRadius:12,padding:14,border:`1px solid ${slideGenerated.test.color}30`}}>
+                <div style={{fontSize:9,color:"#7A84A8",letterSpacing:2,marginBottom:6}}>📋 CAPTION FÜR TIKTOK</div>
+                <pre style={{fontSize:11,color:"#D8DDF0",whiteSpace:"pre-wrap",margin:0,lineHeight:1.6,background:"rgba(6,10,20,0.4)",borderRadius:8,padding:"10px 12px"}}>{`${slideGenerated.generated.hook} ${slideGenerated.test.emoji}\n\n${slideGenerated.generated.frage.q}\n\npersoenlichkeitstest-kostenlos.de${slideGenerated.test.path}\n\n${slideGenerated.test.hashtags}`}</pre>
+                <button onClick={()=>copyText(`${slideGenerated.generated.hook} ${slideGenerated.test.emoji}\n\n${slideGenerated.generated.frage.q}\n\npersoenlichkeitstest-kostenlos.de${slideGenerated.test.path}\n\n${slideGenerated.test.hashtags}`,"slide-caption")} style={{
+                  width:"100%",marginTop:8,
+                  background:copied==="slide-caption"?"#00FF8820":"transparent",
+                  border:`1px solid ${copied==="slide-caption"?"#00FF88":slideGenerated.test.color+"60"}`,
+                  borderRadius:8,padding:"10px",fontSize:12,
+                  color:copied==="slide-caption"?"#00FF88":slideGenerated.test.color,
+                  cursor:"pointer",fontWeight:700
+                }}>{copied==="slide-caption"?"✅ Kopiert!":"📋 Caption kopieren"}</button>
+              </div>
             </div>
           )}
         </div>
