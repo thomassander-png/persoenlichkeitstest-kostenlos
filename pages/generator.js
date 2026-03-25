@@ -356,6 +356,12 @@ function ContentGenerator() {
   const [slideGenerated, setSlideGenerated] = useState(null);
   const [slideLoading, setSlideLoading] = useState(false);
   const [slideTest, setSlideTest] = useState(TESTS[0]);
+  // Trends Tab State
+  const [trendData, setTrendData] = useState(TRENDS);
+  const [trendLoading, setTrendLoading] = useState(false);
+  const [trendError, setTrendError] = useState(null);
+  const [trendLastUpdate, setTrendLastUpdate] = useState(null);
+  const [trendContent, setTrendContent] = useState({});
 
   const generate = () => {
     const hook = selectedTest.hooks[Math.floor(Math.random()*selectedTest.hooks.length)];
@@ -988,23 +994,154 @@ function ContentGenerator() {
       {/* TRENDS TAB */}
       {tab==="trends" && (
         <div>
-          <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:8}}>TREND RADAR — AKTUELL</div>
-          {TRENDS.sort((a,b)=>b.score-a.score).map((t,i)=>(
-            <div key={i} style={{background:"rgba(22,28,53,0.7)",borderRadius:12,padding:12,marginBottom:6,borderLeft:`3px solid ${t.score>85?"#00FF88":t.score>70?"#FFB800":"#7A84A8"}`}}>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                <div>
-                  <span style={{fontSize:13,fontWeight:700,color:"#fff"}}>{t.name}</span>
-                  {t.rising && <span style={{fontSize:9,color:"#00FF88",marginLeft:6}}>↑ RISING</span>}
-                </div>
-                <div style={{fontSize:18,fontWeight:900,color:t.score>85?"#00FF88":t.score>70?"#FFB800":"#7A84A8"}}>{t.score}</div>
+          {/* Header */}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
+            <div>
+              <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:2}}>📈 TREND RADAR</div>
+              <div style={{fontSize:10,color:"#7A84A8"}}>
+                {trendLastUpdate ? `KI-Analyse: ${new Date(trendLastUpdate).toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})} Uhr` : "Klick Analysieren für KI-Trends"}
               </div>
-              <div style={{fontSize:10,color:"#7A84A8",marginTop:2}}>{t.desc}</div>
-              <div style={{height:4,background:"#1A2040",borderRadius:2,marginTop:6,overflow:"hidden"}}>
-                <div style={{height:"100%",width:`${t.score}%`,background:t.score>85?"#00FF88":t.score>70?"#FFB800":"#7A84A8",borderRadius:2}} />
-              </div>
-              <div style={{fontSize:9,color:"#7A84A8",marginTop:3}}>{t.category}</div>
             </div>
-          ))}
+            <button onClick={async()=>{
+              setTrendLoading(true);
+              setTrendError(null);
+              try {
+                const res = await fetch("/api/analyze-trends",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({})});
+                const data = await res.json();
+                if(data.trends && data.trends.length>0){
+                  setTrendData(data.trends);
+                  setTrendLastUpdate(data.generatedAt);
+                  setTrendContent({});
+                  if(data.fallback) setTrendError("⚠️ Offline-Daten (OpenAI API Key fehlt)");
+                } else {
+                  setTrendError("Fehler beim Laden");
+                }
+              } catch(e){
+                setTrendError("API nicht erreichbar");
+              }
+              setTrendLoading(false);
+            }} disabled={trendLoading} style={{
+              background:trendLoading?"rgba(22,28,53,0.7)":"linear-gradient(135deg,#00E5FF,#A855F7)",
+              color:"#fff",border:"none",borderRadius:10,padding:"8px 12px",
+              fontSize:11,fontWeight:700,cursor:trendLoading?"not-allowed":"pointer",
+              opacity:trendLoading?0.7:1,whiteSpace:"nowrap",flexShrink:0
+            }}>{trendLoading?"🔄 Analysiere...":"🔄 Analysieren"}</button>
+          </div>
+
+          {trendError && (
+            <div style={{color:trendError.startsWith("⚠️")?"#FFB800":"#FF2255",fontSize:10,marginBottom:8,textAlign:"center"}}>{trendError}</div>
+          )}
+
+          {/* Trend-Karten */}
+          {[...trendData].sort((a,b)=>b.score-a.score).map((t,i)=>{
+            const testObj = t.bestTest ? TESTS.find(x=>x.id===t.bestTest) : null;
+            const scoreColor = t.score>85?"#00FF88":t.score>70?"#FFB800":"#7A84A8";
+            const content = trendContent[i];
+            return (
+              <div key={i} style={{background:"rgba(22,28,53,0.7)",borderRadius:12,padding:12,marginBottom:8,borderLeft:`3px solid ${scoreColor}`}}>
+                {/* Trend-Header */}
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:4}}>
+                  <div style={{flex:1}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                      <span style={{fontSize:13,fontWeight:700,color:"#fff"}}>{t.name}</span>
+                      {t.rising && <span style={{fontSize:9,color:"#00FF88",background:"rgba(0,255,136,0.1)",padding:"1px 5px",borderRadius:4}}>↑ RISING</span>}
+                      <span style={{fontSize:9,color:"#7A84A8",background:"rgba(122,132,168,0.1)",padding:"1px 5px",borderRadius:4}}>{t.category}</span>
+                    </div>
+                    <div style={{fontSize:10,color:"#7A84A8",marginTop:2}}>{t.desc}</div>
+                    {t.warum && <div style={{fontSize:9,color:"rgba(255,184,0,0.7)",marginTop:2}}>💡 {t.warum}</div>}
+                  </div>
+                  <div style={{fontSize:20,fontWeight:900,color:scoreColor,marginLeft:8,flexShrink:0}}>{t.score}</div>
+                </div>
+
+                {/* Score Bar */}
+                <div style={{height:3,background:"#1A2040",borderRadius:2,marginBottom:6,overflow:"hidden"}}>
+                  <div style={{height:"100%",width:`${t.score}%`,background:scoreColor,borderRadius:2}} />
+                </div>
+
+                {/* Passender Test + Hook-Vorschlag */}
+                {(testObj || t.hook) && (
+                  <div style={{background:"rgba(6,10,20,0.5)",borderRadius:8,padding:"6px 8px",marginBottom:6}}>
+                    {testObj && (
+                      <div style={{display:"flex",alignItems:"center",gap:4,marginBottom:t.hook?3:0}}>
+                        <span style={{fontSize:9,color:"#7A84A8"}}>BESTER TEST:</span>
+                        <span style={{fontSize:10,color:testObj.color,fontWeight:700}}>{testObj.emoji} {testObj.name}</span>
+                      </div>
+                    )}
+                    {t.hook && (
+                      <div style={{display:"flex",alignItems:"center",gap:4}}>
+                        <span style={{fontSize:9,color:"#7A84A8"}}>HOOK:</span>
+                        <span style={{fontSize:10,color:"#fff",fontStyle:"italic"}}>&#34;{t.hookEmoji} {t.hook}&#34;</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Content-Ergebnis wenn generiert */}
+                {content && (
+                  <div style={{background:"rgba(0,229,255,0.06)",borderRadius:8,padding:"8px 10px",marginBottom:6,border:"1px solid rgba(0,229,255,0.15)"}}>
+                    <div style={{fontSize:9,color:"#00E5FF",letterSpacing:1,marginBottom:6}}>⚡ CONTENT READY</div>
+                    <div style={{marginBottom:4}}>
+                      <span style={{fontSize:9,color:"#7A84A8"}}>HOOK: </span>
+                      <span style={{fontSize:11,color:"#fff",fontWeight:700}}>{content.hook}</span>
+                    </div>
+                    <div style={{marginBottom:6}}>
+                      <span style={{fontSize:9,color:"#7A84A8"}}>FRAGE: </span>
+                      <span style={{fontSize:10,color:"#D8DDF0"}}>{content.frage}</span>
+                    </div>
+                    <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>CAPTION:</div>
+                    <div style={{fontSize:10,color:"#D8DDF0",lineHeight:1.5,marginBottom:8,whiteSpace:"pre-line",background:"rgba(6,10,20,0.4)",borderRadius:6,padding:"6px 8px"}}>{content.caption}</div>
+                    <div style={{display:"flex",gap:6}}>
+                      <button onClick={()=>copyText(content.caption,`trend-cap-${i}`)} style={{
+                        flex:1,background:copied===`trend-cap-${i}`?"#00FF8820":"transparent",
+                        border:`1px solid ${copied===`trend-cap-${i}`?"#00FF88":"rgba(0,229,255,0.3)"}`,
+                        borderRadius:6,padding:"5px",fontSize:9,color:copied===`trend-cap-${i}`?"#00FF88":"#00E5FF",cursor:"pointer",fontWeight:700
+                      }}>{copied===`trend-cap-${i}`?"✅ Kopiert":"📋 Caption"}</button>
+                      <button onClick={()=>{
+                        const testForSlide = testObj || TESTS[0];
+                        setSlideTest(testForSlide);
+                        generateSlides(testForSlide, {
+                          hook: content.hook,
+                          frage: content.frageObj || testForSlide.fragen[0],
+                          ergebnis: testForSlide.ergebnisse[0],
+                        });
+                        setTab("slides");
+                      }} style={{
+                        flex:1,background:"linear-gradient(135deg,rgba(168,85,247,0.2),rgba(0,229,255,0.2))",
+                        border:"1px solid rgba(168,85,247,0.4)",
+                        borderRadius:6,padding:"5px",fontSize:9,color:"#A855F7",cursor:"pointer",fontWeight:700
+                      }}>📸 → Slides</button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Content erstellen Button */}
+                <button onClick={()=>{
+                  const targetTest = testObj || TESTS[Math.floor(Math.random()*TESTS.length)];
+                  const hook = t.hook ? `${t.hookEmoji||""} ${t.hook}`.trim() : targetTest.hooks[Math.floor(Math.random()*targetTest.hooks.length)];
+                  const frageObj = targetTest.fragen[Math.floor(Math.random()*targetTest.fragen.length)];
+                  const ergebnis = targetTest.ergebnisse[Math.floor(Math.random()*targetTest.ergebnisse.length)];
+                  const caption = `${hook} ${targetTest.emoji}\n\n${frageObj.q}\n\npersoenlichkeitstest-kostenlos.de${targetTest.path}\n\n${targetTest.hashtags}`;
+                  setTrendContent(prev=>({...prev,[i]:{hook,frage:frageObj.q,frageObj,ergebnis,caption,test:targetTest}}));
+                }} style={{
+                  width:"100%",background:content?"rgba(22,28,53,0.5)":"linear-gradient(135deg,rgba(0,229,255,0.15),rgba(168,85,247,0.15))",
+                  border:`1px solid ${content?"rgba(122,132,168,0.3)":"rgba(0,229,255,0.4)"}`,
+                  borderRadius:8,padding:"7px",fontSize:10,
+                  color:content?"#7A84A8":"#00E5FF",cursor:"pointer",fontWeight:700
+                }}>{content?"🔄 Neu generieren":"⚡ Content erstellen"}</button>
+              </div>
+            );
+          })}
+
+          {/* Info-Box */}
+          <div style={{background:"rgba(0,229,255,0.06)",borderRadius:10,padding:10,marginTop:4,border:"1px solid rgba(0,229,255,0.15)"}}>
+            <div style={{fontSize:10,color:"#00E5FF",fontWeight:700,marginBottom:3}}>💡 WORKFLOW</div>
+            <div style={{fontSize:9,color:"#7A84A8",lineHeight:1.6}}>
+              1. &#34;Analysieren&#34; → KI scannt aktuelle Trends<br/>
+              2. Trend auswählen → &#34;Content erstellen&#34; klicken<br/>
+              3. Caption kopieren + &#34;→ Slides&#34; für TikTok<br/>
+              4. Trends haben 24-72h Fenster — schnell handeln!
+            </div>
+          </div>
         </div>
       )}
 
