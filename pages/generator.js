@@ -517,7 +517,10 @@ function ContentGenerator() {
       ctx.closePath();
     };
 
-    const wrapText = (ctx, text, x, y, maxW, lineH) => {
+    const PADX = 80; // horizontal padding each side
+
+    // Wrap text with automatic line breaking — x is always center
+    const wrapText = (ctx, text, centerX, y, maxW, lineH) => {
       const words = text.split(' ');
       let line = '';
       let lines = [];
@@ -527,108 +530,141 @@ function ContentGenerator() {
           lines.push(line.trim()); line = w + ' ';
         } else { line = test; }
       }
-      lines.push(line.trim());
-      lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineH));
+      if (line.trim()) lines.push(line.trim());
+      lines.forEach((l, i) => ctx.fillText(l, centerX, y + i * lineH));
       return lines.length;
+    };
+
+    // Auto-shrink font until text fits within maxW, then draw
+    const fitText = (ctx, text, centerX, y, maxW, startSize, minSize=28) => {
+      let size = startSize;
+      const family = ctx.font.replace(/^\d+px\s+/, '');
+      const weight = ctx.font.includes('bold') ? 'bold ' : '';
+      while (size >= minSize) {
+        ctx.font = `${weight}${size}px ${family}`;
+        if (ctx.measureText(text).width <= maxW) break;
+        size -= 4;
+      }
+      ctx.fillText(text, centerX, y);
+      return size;
+    };
+
+    // Wrap + auto-shrink: shrink font until all lines fit, then wrap
+    const wrapAutoShrink = (ctx, text, centerX, y, maxW, lineH, startSize, minSize=28) => {
+      let size = startSize;
+      const family = ctx.font.replace(/^\d+px\s+/, '');
+      const weight = ctx.font.includes('bold') ? 'bold ' : '';
+      // Shrink until longest word fits
+      const words = text.split(' ');
+      while (size >= minSize) {
+        ctx.font = `${weight}${size}px ${family}`;
+        const longest = words.reduce((a,b) => ctx.measureText(a).width > ctx.measureText(b).width ? a : b);
+        if (ctx.measureText(longest).width <= maxW) break;
+        size -= 4;
+      }
+      return wrapText(ctx, text, centerX, y, maxW, Math.round(size * 1.25));
     };
 
     // SLIDE 1: Hook
     slides.push(drawSlide((ctx, W, H) => {
+      const maxW = W - PADX * 2;
       // Top label
       ctx.font = 'bold 36px Arial';
       ctx.fillStyle = t.color;
       ctx.textAlign = 'center';
-      ctx.fillText(t.emoji + ' ' + t.name.toUpperCase(), W/2, 280);
-      // Hook text — split at keyword
+      fitText(ctx, t.emoji + ' ' + t.name.toUpperCase(), W/2, 280, maxW, 36);
+      // Hook — wrap with auto-shrink, split into 2 color blocks
       const hookWords = g.hook.split(' ');
       const midIdx = Math.ceil(hookWords.length / 2);
       const line1 = hookWords.slice(0, midIdx).join(' ');
       const line2 = hookWords.slice(midIdx).join(' ');
-      ctx.font = 'bold 96px Arial';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(line1, W/2, H/2 - 80);
-      ctx.font = 'bold 96px Arial';
+      const s1 = fitText(ctx, line1, W/2, H/2 - 100, maxW, 96);
       ctx.fillStyle = t.color;
-      ctx.fillText(line2, W/2, H/2 + 40);
+      ctx.font = `bold ${s1}px Arial`;
+      fitText(ctx, line2, W/2, H/2 + 40, maxW, s1);
       // Subline
       ctx.font = '52px Arial';
       ctx.fillStyle = '#FFB800';
-      ctx.fillText('Die meisten wissen es nicht...', W/2, H/2 + 180);
+      fitText(ctx, 'Die meisten wissen es nicht...', W/2, H/2 + 200, maxW, 52);
       // Bottom URL
       ctx.font = 'bold 38px Arial';
       ctx.fillStyle = 'rgba(255,255,255,0.4)';
-      ctx.fillText('persoenlichkeitstest-kostenlos.de', W/2, H - 200);
+      fitText(ctx, 'persoenlichkeitstest-kostenlos.de', W/2, H - 200, maxW, 38);
     }));
 
     // SLIDE 2: Frage
     slides.push(drawSlide((ctx, W, H) => {
+      const maxW = W - PADX * 2;
       ctx.font = 'bold 40px Arial';
       ctx.fillStyle = t.color;
       ctx.textAlign = 'center';
       ctx.fillText('FRAGE:', W/2, 280);
       ctx.font = 'bold 72px Arial';
       ctx.fillStyle = '#ffffff';
-      const lines = wrapText(ctx, g.frage.q, W/2, H/2 - 280, W - 120, 90);
+      const lines = wrapAutoShrink(ctx, g.frage.q, W/2, H/2 - 280, maxW, 90, 72);
       // Answers
       g.frage.a.forEach((ans, i) => {
         const ay = H/2 + 80 + i * 160;
         ctx.fillStyle = i === 0 ? t.color + '30' : 'rgba(255,255,255,0.05)';
-        roundRect(ctx, 80, ay - 55, W - 160, 120, 20);
+        roundRect(ctx, PADX, ay - 55, W - PADX*2, 120, 20);
         ctx.fill();
         ctx.strokeStyle = i === 0 ? t.color : 'rgba(255,255,255,0.1)';
         ctx.lineWidth = 2;
-        roundRect(ctx, 80, ay - 55, W - 160, 120, 20);
+        roundRect(ctx, PADX, ay - 55, W - PADX*2, 120, 20);
         ctx.stroke();
         ctx.font = 'bold 52px Arial';
         ctx.fillStyle = i === 0 ? t.color : '#D8DDF0';
         ctx.textAlign = 'center';
-        ctx.fillText(ans, W/2, ay + 15);
+        fitText(ctx, ans, W/2, ay + 15, maxW - 20, 52);
       });
     }));
 
     // SLIDE 3: Ergebnis
     slides.push(drawSlide((ctx, W, H) => {
+      const maxW = W - PADX * 2;
       ctx.font = 'bold 44px Arial';
       ctx.fillStyle = t.color;
       ctx.textAlign = 'center';
       ctx.fillText('DEIN ERGEBNIS:', W/2, 280);
-      // Big result type
+      // Big result type — auto-shrink
       ctx.font = 'bold 160px Arial';
       ctx.fillStyle = t.color;
-      ctx.fillText(g.ergebnis.typ, W/2, H/2 - 60);
-      // Name
+      fitText(ctx, g.ergebnis.typ, W/2, H/2 - 60, maxW, 160);
+      // Name — auto-shrink
       ctx.font = 'bold 80px Arial';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(g.ergebnis.name, W/2, H/2 + 80);
+      fitText(ctx, g.ergebnis.name, W/2, H/2 + 80, maxW, 80);
       // Percentage
       ctx.font = '52px Arial';
       ctx.fillStyle = '#FFB800';
-      ctx.fillText('Nur ' + g.ergebnis.pct + ' der Menschen', W/2, H/2 + 200);
-      // Desc
+      fitText(ctx, 'Nur ' + g.ergebnis.pct + ' der Menschen', W/2, H/2 + 200, maxW, 52);
+      // Desc — wrap
       ctx.font = '48px Arial';
       ctx.fillStyle = 'rgba(216,221,240,0.8)';
-      wrapText(ctx, g.ergebnis.desc, W/2, H/2 + 340, W - 160, 65);
+      wrapAutoShrink(ctx, g.ergebnis.desc, W/2, H/2 + 340, maxW, 65, 48);
     }));
 
     // SLIDE 4: CTA
     slides.push(drawSlide((ctx, W, H) => {
+      const maxW = W - PADX * 2;
       ctx.font = 'bold 52px Arial';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
-      ctx.fillText('Welcher Typ bist', W/2, H/2 - 200);
+      fitText(ctx, 'Welcher Typ bist', W/2, H/2 - 200, maxW, 52);
       ctx.font = 'bold 120px Arial';
       ctx.fillStyle = t.color;
-      ctx.fillText('DU?', W/2, H/2 - 60);
+      fitText(ctx, 'DU?', W/2, H/2 - 60, maxW, 120);
       ctx.font = '52px Arial';
       ctx.fillStyle = '#FFB800';
-      ctx.fillText('👇 Link in der Bio', W/2, H/2 + 100);
+      fitText(ctx, '👇 Link in der Bio', W/2, H/2 + 100, maxW, 52);
       // URL box
       ctx.fillStyle = 'rgba(255,255,255,0.08)';
-      roundRect(ctx, 80, H/2 + 200, W - 160, 120, 20);
+      roundRect(ctx, PADX, H/2 + 200, W - PADX*2, 120, 20);
       ctx.fill();
       ctx.font = 'bold 44px Arial';
       ctx.fillStyle = t.color;
-      ctx.fillText('persoenlichkeitstest-kostenlos.de' + t.path, W/2, H/2 + 278);
+      fitText(ctx, 'persoenlichkeitstest-kostenlos.de' + t.path, W/2, H/2 + 278, maxW - 20, 44);
     }));
 
     setSlideGenerated({slides, test: t, generated: g});
