@@ -577,6 +577,8 @@ function ContentGenerator() {
   const [trendError, setTrendError] = useState(null);
   const [trendLastUpdate, setTrendLastUpdate] = useState(null);
   const [trendContent, setTrendContent] = useState({});
+  const [trendIsLive, setTrendIsLive] = useState(false);
+  const [trendGoogleCount, setTrendGoogleCount] = useState(0);
 
   const generate = () => {
     const hook = selectedTest.hooks[Math.floor(Math.random()*selectedTest.hooks.length)];
@@ -1433,8 +1435,20 @@ function ContentGenerator() {
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
             <div>
               <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:2}}>📈 TREND RADAR</div>
-              <div style={{fontSize:10,color:"#7A84A8"}}>
-                {trendLastUpdate ? `KI-Analyse: ${new Date(trendLastUpdate).toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})} Uhr` : "Klick Analysieren für KI-Trends"}
+              <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                <div style={{fontSize:10,color:"#7A84A8"}}>
+                  {trendLastUpdate ? `Analyse: ${new Date(trendLastUpdate).toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})} Uhr` : "Klick Analysieren für aktuelle Trends"}
+                </div>
+                {trendIsLive && (
+                  <div style={{background:"#FF2255",color:"#fff",fontSize:8,fontWeight:900,padding:"2px 6px",borderRadius:4,letterSpacing:1,animation:"pulse 2s infinite"}}>
+                    🔴 LIVE
+                  </div>
+                )}
+                {trendIsLive && trendGoogleCount>0 && (
+                  <div style={{fontSize:9,color:"#00FF88"}}>
+                    ✓ {trendGoogleCount} Google Trends DE
+                  </div>
+                )}
               </div>
             </div>
             <button onClick={async()=>{
@@ -1447,6 +1461,8 @@ function ContentGenerator() {
                   setTrendData(data.trends);
                   setTrendLastUpdate(data.generatedAt);
                   setTrendContent({});
+                  setTrendIsLive(data.liveData || false);
+                  setTrendGoogleCount(data.googleTrendsCount || 0);
                   if(data.fallback) setTrendError("⚠️ Offline-Daten (OpenAI API Key fehlt)");
                 } else {
                   setTrendError("Fehler beim Laden");
