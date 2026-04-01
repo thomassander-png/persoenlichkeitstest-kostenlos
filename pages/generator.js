@@ -326,11 +326,11 @@ function LoginScreen({onLogin}) {
         <div style={{fontSize:20,fontWeight:900,color:"#fff",marginBottom:4}}>Content Generator</div>
         <div style={{fontSize:12,color:"#7A84A8",marginBottom:20}}>Nur für Admins</div>
         <input type="password" value={pw} onChange={e=>{setPw(e.target.value);setError(false);}}
-          placeholder="Passwort" style={{background:"#161C35",border:`1px solid ${error?"#FF2255":"#1A2040"}`,borderRadius:10,padding:"12px 16px",color:"#fff",fontSize:14,width:220,textAlign:"center",outline:"none"}}
+          placeholder="Passwort" style={{background:"#161C35",border:`1px solid ${error?"#FF2255":"#1A2040"}`,borderRadius:10,padding:"14px 16px",color:"#fff",fontSize:16,width:"min(260px,80vw)",textAlign:"center",outline:"none",WebkitAppearance:"none",display:"block",margin:"0 auto"}}
           onKeyDown={e=>{if(e.key==="Enter"){pw===PASSWORD?onLogin():setError(true);}}} />
         <br/>
         <button onClick={()=>pw===PASSWORD?onLogin():setError(true)}
-          style={{background:"linear-gradient(135deg,#00E5FF,#A855F7)",border:"none",borderRadius:10,padding:"12px 32px",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer",marginTop:12}}>
+          style={{background:"linear-gradient(135deg,#00E5FF,#A855F7)",border:"none",borderRadius:10,padding:"14px 32px",color:"#fff",fontSize:16,fontWeight:700,cursor:"pointer",marginTop:12,minHeight:52,touchAction:"manipulation",WebkitTapHighlightColor:"transparent"}}>
           Einloggen
         </button>
         {error && <div style={{color:"#FF2255",fontSize:11,marginTop:8}}>Falsches Passwort</div>}
@@ -760,7 +760,7 @@ function ContentGenerator() {
   };
 
   return (
-    <div style={{minHeight:"100vh",background:"#060A14",fontFamily:"'DM Sans',system-ui,sans-serif",color:"#fff",maxWidth:600,margin:"0 auto",padding:"12px 16px"}}>
+    <div style={{minHeight:"100vh",background:"#060A14",fontFamily:"'DM Sans',system-ui,sans-serif",color:"#fff",maxWidth:600,margin:"0 auto",padding:"12px 14px",WebkitTapHighlightColor:"transparent",overflowX:"hidden"}}>
       <Head><title>Content Generator | Admin</title></Head>
       
       {/* Header */}
@@ -770,12 +770,15 @@ function ContentGenerator() {
       </div>
 
       {/* Tabs */}
-      <div style={{display:"flex",gap:4,marginBottom:16,overflowX:"auto"}}>
+      <div style={{display:"flex",gap:4,marginBottom:16,overflowX:"auto",WebkitOverflowScrolling:"touch",scrollbarWidth:"none",msOverflowStyle:"none",paddingBottom:2}}>
+        <style>{`.tab-scroll::-webkit-scrollbar{display:none}`}</style>
         {[{id:"generate",label:"⚡ Generator"},{id:"batch",label:"📦 Batch"},{id:"slides",label:"📸 Slides"},{id:"optimize",label:"🔥 Optimieren"},{id:"script",label:"🎬 Script"},{id:"trends",label:"📈 Trends"},{id:"calendar",label:"📅 Plan"}].map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)} style={{
             flexShrink:0,background:tab===t.id?"rgba(0,229,255,0.15)":"rgba(22,28,53,0.7)",
-            border:`1px solid ${tab===t.id?"#00E5FF":"#1A2040"}`,borderRadius:8,padding:"8px 10px",
-            fontSize:10,fontWeight:700,color:tab===t.id?"#00E5FF":"#7A84A8",cursor:"pointer",whiteSpace:"nowrap"
+            border:`1px solid ${tab===t.id?"#00E5FF":"#1A2040"}`,borderRadius:8,
+            padding:"10px 12px",minHeight:44,
+            fontSize:11,fontWeight:700,color:tab===t.id?"#00E5FF":"#7A84A8",cursor:"pointer",whiteSpace:"nowrap",
+            WebkitTapHighlightColor:"transparent",touchAction:"manipulation"
           }}>{t.label}</button>
         ))}
       </div>
@@ -797,7 +800,8 @@ function ContentGenerator() {
 
           <button onClick={generate} style={{
             width:"100%",background:"linear-gradient(135deg,#00E5FF,#A855F7)",color:"#fff",
-            border:"none",borderRadius:12,padding:"14px",fontSize:15,fontWeight:700,cursor:"pointer",marginBottom:16
+            border:"none",borderRadius:12,padding:"16px",fontSize:15,fontWeight:700,cursor:"pointer",marginBottom:16,
+            minHeight:52,touchAction:"manipulation",WebkitTapHighlightColor:"transparent"
           }}>⚡ Video generieren</button>
 
           {generated && (
@@ -1133,37 +1137,38 @@ function ContentGenerator() {
             <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>HOOK</div>
             <input value={optimizeInput.hook} onChange={e=>setOptimizeInput(p=>({...p,hook:e.target.value}))}
               placeholder="z.B. Nur 2% der Menschen sind dieser Typ..."
-              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"12px 12px",color:"#fff",fontSize:16,outline:"none",boxSizing:"border-box",WebkitAppearance:"none"}} />
           </div>
           <div style={{marginBottom:8}}>
             <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>FRAGE</div>
             <input value={optimizeInput.frage} onChange={e=>setOptimizeInput(p=>({...p,frage:e.target.value}))}
               placeholder="z.B. Du bist auf einer Party. Was machst du?"
-              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"12px 12px",color:"#fff",fontSize:16,outline:"none",boxSizing:"border-box",WebkitAppearance:"none"}} />
           </div>
           <div style={{marginBottom:8}}>
             <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>ANTWORTEN (eine pro Zeile)</div>
             <textarea value={optimizeInput.antworten.join("\n")} onChange={e=>setOptimizeInput(p=>({...p,antworten:e.target.value.split("\n")}))}
               rows={4} placeholder="🎤 Unterhalte alle\n🤫 Tiefe Gespräche\n👀 Beobachten\n🎯 Organisiere alles"
-              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",resize:"none",boxSizing:"border-box"}} />
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"12px 12px",color:"#fff",fontSize:16,outline:"none",resize:"none",boxSizing:"border-box",WebkitAppearance:"none"}} />
           </div>
           <div style={{marginBottom:8}}>
             <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>ERGEBNIS</div>
             <input value={optimizeInput.ergebnis} onChange={e=>setOptimizeInput(p=>({...p,ergebnis:e.target.value}))}
               placeholder="z.B. INTJ — Strategisch. Unabhängig. Visionär."
-              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"12px 12px",color:"#fff",fontSize:16,outline:"none",boxSizing:"border-box",WebkitAppearance:"none"}} />
           </div>
           <div style={{marginBottom:12}}>
             <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>CTA</div>
             <input value={optimizeInput.cta} onChange={e=>setOptimizeInput(p=>({...p,cta:e.target.value}))}
               placeholder="z.B. Welcher Typ bist DU? Link in der Bio 👇"
-              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"8px 10px",color:"#fff",fontSize:11,outline:"none",boxSizing:"border-box"}} />
+              style={{width:"100%",background:"#161C35",border:"1px solid #1A2040",borderRadius:8,padding:"12px 12px",color:"#fff",fontSize:16,outline:"none",boxSizing:"border-box",WebkitAppearance:"none"}} />
           </div>
 
           <button onClick={generateOptimize} disabled={optimizeLoading || !optimizeInput.hook} style={{
             width:"100%",background:optimizeLoading?"rgba(22,28,53,0.7)":`linear-gradient(135deg,${aggressivLevel<=5?"#FF6B35":aggressivLevel<=8?"#FF2255":"#8B0000"},${aggressivLevel<=5?"#FF2255":aggressivLevel<=8?"#A855F7":"#FF0000"})`,color:"#fff",
-            border:"none",borderRadius:12,padding:"14px",fontSize:14,fontWeight:700,cursor:optimizeLoading?"not-allowed":"pointer",marginBottom:12,opacity:optimizeLoading?0.7:1
-          }}>{optimizeLoading?"🔥 KI optimiert...":`🔥 Optimieren (Level ${aggressivLevel})`}</button>
+            border:"none",borderRadius:12,padding:"16px",fontSize:15,fontWeight:700,cursor:optimizeLoading?"not-allowed":"pointer",marginBottom:12,opacity:optimizeLoading?0.7:1,
+            minHeight:52,touchAction:"manipulation",WebkitTapHighlightColor:"transparent"
+          }}>{optimizeLoading?`🔥 KI optimiert...`:`🔥 Optimieren (Level ${aggressivLevel})`}</button>
 
           {optimizeError && <div style={{color:"#FF2255",fontSize:11,marginBottom:8,textAlign:"center"}}>{optimizeError}</div>}
 
