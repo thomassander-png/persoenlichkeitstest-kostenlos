@@ -353,6 +353,8 @@ function ContentGenerator() {
   const [optimizeResult, setOptimizeResult] = useState(null);
   const [optimizeError, setOptimizeError] = useState(null);
   const [optimizeInput, setOptimizeInput] = useState({hook:"",frage:"",antworten:["","","",""],ergebnis:"",cta:""});
+  const [aggressivLevel, setAggressivLevel] = useState(7);
+  const [activeVorlage, setActiveVorlage] = useState(null);
   const [slideGenerated, setSlideGenerated] = useState(null);
   const [slideLoading, setSlideLoading] = useState(false);
   const [slideTest, setSlideTest] = useState(TESTS[0]);
@@ -438,7 +440,7 @@ function ContentGenerator() {
       const res = await fetch("/api/optimize-content", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(optimizeInput)
+        body: JSON.stringify({...optimizeInput, aggressivLevel, vorlage: activeVorlage})
       });
       const data = await res.json();
       if (data.result) {
@@ -958,6 +960,89 @@ function ContentGenerator() {
           <div style={{fontSize:11,color:"#7A84A8",letterSpacing:2,marginBottom:4}}>🔥 OPTIMIERUNGS-LAYER</div>
           <div style={{fontSize:10,color:"#7A84A8",marginBottom:12}}>Bestehenden Output schärfen. Nicht neu erfinden — aggressiv verbessern.</div>
 
+          {/* VORLAGEN */}
+          {[{
+            id:"ego", label:"👑 Ego-Trigger", color:"#FF0099",
+            vorlagen:[
+              {name:"Nur 1%",hook:"Nur 1% der Menschen haben diesen Typ",frage:"Was tust du wenn alle gegen dich sind?",antworten:["💪 Ich gewinne trotzdem","😤 Ich kämpfe zurück","🤐 Ich schweige","🏃 Ich gehe"],ergebnis:"ALPHA — Du bist nicht für die Masse gemacht",cta:"Kommentier deinen Typ 👇"},
+              {name:"Seltenster Typ",hook:"Der seltenste Typ der Welt — bist du dabei?",frage:"Wie reagierst du auf Kritik?",antworten:["😂 Lachen","🔥 Kontern","😶 Ignorieren","📝 Notieren"],ergebnis:"SIGMA — Unkontrollierbar. Unberechenbar. Unaufhaltbar.",cta:"Teile wenn du auch Sigma bist 🔥"},
+              {name:"IQ Test",hook:"Dein IQ in 3 Fragen — die meisten scheitern",frage:"Was ist wichtiger?",antworten:["🧠 Intelligenz","💛 Empathie","💰 Geld","🔥 Charisma"],ergebnis:"TOP 5% — Du denkst anders als 95% der Menschen",cta:"Zeig deinen Score 👇"},
+              {name:"Dunkle Seite",hook:"Deine dunkle Seite die du versteckst...",frage:"Was würdest du tun wenn niemand zuschaut?",antworten:["😈 Das was ich will","🤫 Nichts ändern","💭 Nachdenken","🚀 Alles riskieren"],ergebnis:"DARK SIGMA — Du hast Macht die du noch nicht nutzt",cta:"Kommentier wenn das stimmt 💀"},
+            ]
+          },{
+            id:"fomo", label:"😱 Fear/FOMO", color:"#FF6B35",
+            vorlagen:[
+              {name:"Warnung",hook:"WARNUNG: Dieser Test verändert wie du dich siehst",frage:"Was macht dir heimlich Angst?",antworten:["😰 Versagen","💔 Verlassen werden","🤷 Bedeutungslos sein","🕰️ Zeit verlieren"],ergebnis:"ANXIOUS ACHIEVER — Du läufst vor dir selbst weg",cta:"Wer kennt das? Kommentier 👇"},
+              {name:"Zu spät",hook:"Wenn du das nicht weißt ist es zu spät...",frage:"Wie viel Prozent deines Potenzials nutzt du?",antworten:["😅 10%","🤔 30%","💪 60%","🔥 100%"],ergebnis:"SCHLAFENDER RIESE — 90% deines Potenzials liegt brach",cta:"Spar dir den Test wenn du bereit bist 👇"},
+              {name:"Letzter Test",hook:"Der letzte Persönlichkeitstest den du je brauchst",frage:"Was hält dich wirklich zurück?",antworten:["😨 Angst","🦥 Faulheit","👥 Andere Menschen","🧠 Ich selbst"],ergebnis:"SELF-SABOTEUR — Du bist dein größter Feind",cta:"Kommentier wenn das zu real ist 💀"},
+              {name:"Niemand sagt dir",hook:"Was dir niemand über dich sagt...",frage:"Wie oft denkst du an die Zukunft?",antworten:["⏰ Ständig","🌅 Manchmal","🤷 Selten","💀 Nie"],ergebnis:"CHRONIC OVERTHINKER — Dein Gehirn lässt dich nicht schlafen",cta:"Wer ist auch so? 👇"},
+            ]
+          },{
+            id:"challenge", label:"⚡ Challenge", color:"#00E5FF",
+            vorlagen:[
+              {name:"3 Fragen",hook:"3 Fragen die dich komplett entlarven",frage:"Frage 1: Was machst du wenn du allein bist?",antworten:["📱 TikTok scrollen","🎮 Zocken","📚 Lesen","😴 Schlafen"],ergebnis:"CHRONICALLY ONLINE — Du existierst nur mit WLAN",cta:"Kommentier deine Antwort 👇"},
+              {name:"Ehrlich",hook:"Sei mal ehrlich zu dir selbst...",frage:"Wie oft checkst du dein Handy pro Stunde?",antworten:["😅 1-2 mal","📱 5-10 mal","💀 Ich höre nie auf","🤔 Ich weiß es nicht"],ergebnis:"PHONE ADDICT LEVEL 9000 — Dein Daumen ist dein bestes Körperteil",cta:"Zeig deinen Score deinen Freunden 😂"},
+              {name:"Typ erraten",hook:"Ich errate deinen Typ in 3 Fragen",frage:"Erste Nachricht von Crush um Mitternacht?",antworten:["😴 Morgen antworten","💬 Sofort schreiben","😏 Warten lassen","👀 Gelesen lassen"],ergebnis:"CERTIFIED RIZZ KING — Du spielst das Spiel besser als alle",cta:"Stimmt das? Kommentier 👇"},
+              {name:"Wahrheit",hook:"Die Wahrheit über deinen Typ die du nicht hören willst",frage:"Was sagen deine Freunde hinter deinem Rücken?",antworten:["🤣 Er/Sie ist zu viel","😴 Er/Sie ist langweilig","🔥 Er/Sie ist intense","🤷 Nichts Besonderes"],ergebnis:"TOO MUCH — Du bist eine Hauptfigur in einem Film den niemand sehen will",cta:"Wer kennt das Gefühl? 💀"},
+            ]
+          },{
+            id:"drama", label:"💔 Relationship Drama", color:"#A855F7",
+            vorlagen:[
+              {name:"Attachment Style",hook:"Dein Attachment Style erklärt ALLES",frage:"Dein Partner antwortet 3h nicht. Was denkst du?",antworten:["😤 Er/Sie ignoriert mich","😰 Ist was passiert?","🤷 Ist mir egal","📱 Ich schreibe nochmal"],ergebnis:"ANXIOUS ATTACHMENT — Du liebst zu viel und zu schnell",cta:"Wer ist auch anxious? Kommentier 👇"},
+              {name:"Red Flag",hook:"Deine größte Red Flag in Beziehungen",frage:"Was machst du nach einem Streit?",antworten:["🤐 Stille Behandlung","💬 Sofort reden","🏃 Weglaufen","😤 Eskalieren"],ergebnis:"STONEWALLER — Du mauert bis die andere Person aufgibt",cta:"Wer hat das auch? 💀"},
+              {name:"Crush Test",hook:"Was dein Crush wirklich über dich denkt...",frage:"Wie lange brauchst du um Gefühle zu zeigen?",antworten:["💨 Sofort","🤔 Wochen","🗓️ Monate","💀 Nie"],ergebnis:"EMOTIONALLY UNAVAILABLE — Du bist ein Rätsel das niemand lösen kann",cta:"Kommentier wenn das zu real ist 💔"},
+              {name:"Toxic Trait",hook:"Dein toxischster Trait in Beziehungen",frage:"Was machst du wenn jemand dich verlässt?",antworten:["😤 Ich zeige was er/sie verliert","😢 Ich breche zusammen","🤷 Ich mache weiter","🔥 Ich werde besser"],ergebnis:"REVENGE GLOW-UP TYPE — Du nutzt Schmerz als Treibstoff",cta:"Wer ist auch so? 🔥"},
+            ]
+          },{
+            id:"identity", label:"🎭 Identity", color:"#00FF88",
+            vorlagen:[
+              {name:"Welcher Typ",hook:"Welcher Typ bist du wirklich?",frage:"Wie würdest du dich in einem Wort beschreiben?",antworten:["🔥 Intense","😎 Chill","🧠 Analytisch","💛 Emotional"],ergebnis:"THE MAIN CHARACTER — Du lebst dein Leben als wärst du in einem Film",cta:"Kommentier deinen Typ 👇"},
+              {name:"Energie",hook:"Deine Energie verrät alles über dich",frage:"Was ist deine Superpower?",antworten:["👁️ Ich lese Menschen","💬 Ich überzeuge alle","🧠 Ich löse alles","💛 Ich heile andere"],ergebnis:"EMPATH SIGMA — Du fühlst was andere denken bevor sie es sagen",cta:"Wer ist auch so? Kommentier 👇"},
+              {name:"Vibe Check",hook:"Dein Vibe Check Ergebnis...",frage:"Was machst du wenn du gestresst bist?",antworten:["🏃 Sport","🎵 Musik","😴 Schlafen","📱 Scrollen"],ergebnis:"CHAOTIC NEUTRAL — Du bist unvorhersehbar und das ist deine Stärke",cta:"Zeig deinen Freunden deinen Vibe 🔥"},
+              {name:"Geheimnis",hook:"Das Geheimnis das dein Typ verrät",frage:"Was denkst du wenn du allein bist?",antworten:["🌍 Über die Welt","💭 Über mich selbst","💔 Über andere","🤷 An nichts"],ergebnis:"DEEP THINKER — Du lebst in deinem Kopf und das ist okay",cta:"Wer kennt das? 👇"},
+            ]
+          },{
+            id:"brainrot", label:"🧟 Brainrot/Meme", color:"#FFB800",
+            vorlagen:[
+              {name:"Sigma Test",hook:"Dein Sigma Score in 3 Fragen 💀",frage:"Was ist dein Lieblingsessen um 3 Uhr nachts?",antworten:["🍕 Kalte Pizza","🥣 Trockene Cornflakes","🍜 Instant Nudeln","💀 Ich schlafe nicht"],ergebnis:"FULL SIGMA — Du brauchst keine Gesellschaft. Nur WLAN und Snacks.",cta:"Kommentier deinen Score 💀"},
+              {name:"Brainrot Level",hook:"Dein Brainrot Level ist erschreckend",frage:"Was sagst du wenn jemand fragt wie es dir geht?",antworten:["😊 Gut danke","💀 Ich bin müde","🤖 Ich funktioniere","🧟 Existieren ist genug"],ergebnis:"CHRONICALLY ONLINE LEVEL 100 — Du bist nicht mehr zu retten",cta:"Wer ist auch so? 🧟"},
+              {name:"NPC Check",hook:"Bist du ein NPC oder Hauptcharakter?",frage:"Was machst du wenn du eine Gruppe siehst die lacht?",antworten:["😰 Denken sie über mich nach?","🤷 Interessiert mich nicht","😂 Mitlachen","👀 Beobachten"],ergebnis:"BACKGROUND CHARACTER — Du existierst aber niemand merkt es",cta:"NPC oder Hauptcharakter? Kommentier 👇"},
+              {name:"Skibidi Test",hook:"Skibidi oder Sigma? Der Test entscheidet",frage:"Wie oft sagst du 'no cap' pro Tag?",antworten:["💀 Ständig","😅 Manchmal","🤔 Was ist no cap?","🚫 Nie"],ergebnis:"CERTIFIED SKIBIDI — Du bist die Hauptfigur der Gen Z Apokalypse",cta:"Kommentier dein Level 🔥"},
+            ]
+          }].map(kat => (
+            <div key={kat.id} style={{marginBottom:12}}>
+              <div style={{fontSize:9,color:kat.color,letterSpacing:2,marginBottom:6,fontWeight:700}}>{kat.label}</div>
+              <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                {kat.vorlagen.map((v,i) => (
+                  <button key={i} onClick={()=>{
+                    setActiveVorlage(kat.id);
+                    setOptimizeInput({hook:v.hook,frage:v.frage,antworten:v.antworten,ergebnis:v.ergebnis,cta:v.cta});
+                  }} style={{
+                    background: activeVorlage===kat.id && optimizeInput.hook===v.hook ? `${kat.color}25` : "rgba(22,28,53,0.7)",
+                    border:`1px solid ${activeVorlage===kat.id && optimizeInput.hook===v.hook ? kat.color : "#1A2040"}`,
+                    borderRadius:8,padding:"5px 10px",cursor:"pointer",fontSize:10,
+                    color: activeVorlage===kat.id && optimizeInput.hook===v.hook ? kat.color : "#7A84A8",fontWeight:600
+                  }}>{v.name}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {/* AGGRESSIVITÄTS-SLIDER */}
+          <div style={{background:"rgba(22,28,53,0.7)",borderRadius:12,padding:"12px 14px",marginBottom:12,border:"1px solid #1A2040"}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+              <div style={{fontSize:9,color:"#7A84A8",letterSpacing:2}}>⚡ AGGRESSIVITÄTS-LEVEL</div>
+              <div style={{fontSize:12,fontWeight:800,color: aggressivLevel<=3?"#00E5FF":aggressivLevel<=6?"#FFB800":aggressivLevel<=8?"#FF6B35":"#FF2255"}}>
+                {aggressivLevel} — {aggressivLevel<=3?"Soft":aggressivLevel<=5?"Medium":aggressivLevel<=7?"Aggressiv":aggressivLevel<=9?"Maximum":"NUCLEAR 💀"}
+              </div>
+            </div>
+            <input type="range" min={1} max={10} value={aggressivLevel} onChange={e=>setAggressivLevel(Number(e.target.value))}
+              style={{width:"100%",accentColor: aggressivLevel<=3?"#00E5FF":aggressivLevel<=6?"#FFB800":aggressivLevel<=8?"#FF6B35":"#FF2255",cursor:"pointer"}} />
+            <div style={{display:"flex",justifyContent:"space-between",fontSize:9,color:"#7A84A8",marginTop:4}}>
+              <span>😊 Soft</span><span>🔥 Aggressiv</span><span>💀 Nuclear</span>
+            </div>
+          </div>
+
           {/* Input Felder */}
           <div style={{marginBottom:8}}>
             <div style={{fontSize:9,color:"#7A84A8",marginBottom:3}}>HOOK</div>
@@ -991,16 +1076,16 @@ function ContentGenerator() {
           </div>
 
           <button onClick={generateOptimize} disabled={optimizeLoading || !optimizeInput.hook} style={{
-            width:"100%",background:optimizeLoading?"rgba(22,28,53,0.7)":"linear-gradient(135deg,#FF6B35,#FF2255)",color:"#fff",
+            width:"100%",background:optimizeLoading?"rgba(22,28,53,0.7)":`linear-gradient(135deg,${aggressivLevel<=5?"#FF6B35":aggressivLevel<=8?"#FF2255":"#8B0000"},${aggressivLevel<=5?"#FF2255":aggressivLevel<=8?"#A855F7":"#FF0000"})`,color:"#fff",
             border:"none",borderRadius:12,padding:"14px",fontSize:14,fontWeight:700,cursor:optimizeLoading?"not-allowed":"pointer",marginBottom:12,opacity:optimizeLoading?0.7:1
-          }}>{optimizeLoading?"🔥 KI optimiert...":"🔥 Jetzt optimieren"}</button>
+          }}>{optimizeLoading?"🔥 KI optimiert...":`🔥 Optimieren (Level ${aggressivLevel})`}</button>
 
           {optimizeError && <div style={{color:"#FF2255",fontSize:11,marginBottom:8,textAlign:"center"}}>{optimizeError}</div>}
 
           {optimizeResult && (
             <div>
               <div style={{background:"rgba(255,107,53,0.08)",borderRadius:12,padding:16,marginBottom:8,border:"1px solid rgba(255,107,53,0.25)"}}>
-                <div style={{fontSize:9,color:"#FF6B35",letterSpacing:2,marginBottom:8}}>🔥 OPTIMIERTER OUTPUT</div>
+                <div style={{fontSize:9,color:"#FF6B35",letterSpacing:2,marginBottom:8}}>🔥 OPTIMIERTER OUTPUT (LEVEL {aggressivLevel})</div>
                 <pre style={{fontSize:11,color:"#D8DDF0",whiteSpace:"pre-wrap",margin:0,lineHeight:1.8}}>{optimizeResult}</pre>
                 <button onClick={()=>copyText(optimizeResult,"opt")} style={{
                   width:"100%",background:copied==="opt"?"#00FF8820":"transparent",

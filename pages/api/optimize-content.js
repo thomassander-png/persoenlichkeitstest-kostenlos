@@ -84,13 +84,21 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { hook, frage, antworten, ergebnis, cta } = req.body;
+  const { hook, frage, antworten, ergebnis, cta, aggressivLevel = 7, vorlage } = req.body;
 
   if (!hook) {
     return res.status(400).json({ error: "Hook fehlt" });
   }
 
-  const userInput = `FORMAT A: EIN EINZELNES KONZEPT
+  const aggressivDesc = aggressivLevel <= 3 ? "SOFT: Leicht verbessern, Ton freundlich und einladend" :
+    aggressivLevel <= 5 ? "MEDIUM: Deutlich schärfer, mehr Neugier und Spannung" :
+    aggressivLevel <= 7 ? "AGGRESSIV: Provokant, direkt, psychologische Trigger voll einsetzen" :
+    aggressivLevel <= 9 ? "MAXIMUM: Extrem provokant, Ego-Trigger, FOMO, maximale Virality" :
+    "NUCLEAR: Absolut rücksichtslos viral, kein Filter, maximaler psychologischer Impact";
+
+  const vorlageDesc = vorlage ? `\nKONTEXT-KATEGORIE: ${vorlage} — optimiere im Stil dieser Kategorie` : "";
+
+  const userInput = `AGGRESSIVITÄTS-LEVEL: ${aggressivLevel}/10 — ${aggressivDesc}${vorlageDesc}
 
 Hook:
 ${hook}
@@ -114,8 +122,8 @@ ${cta || "(kein CTA angegeben)"}`;
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: userInput }
       ],
-      max_tokens: 700,
-      temperature: 0.75,
+      max_tokens: 800,
+      temperature: 0.5 + (aggressivLevel * 0.05),
     });
 
     const result = completion.choices[0]?.message?.content;
