@@ -1012,7 +1012,7 @@ function ContentGenerator() {
             width:"100%",background:"linear-gradient(135deg,#00E5FF,#A855F7)",color:"#fff",
             border:"none",borderRadius:12,padding:"16px",fontSize:15,fontWeight:700,cursor:"pointer",marginBottom:16,
             minHeight:52,touchAction:"manipulation",WebkitTapHighlightColor:"transparent"
-          }}>⚡ Video generieren</button>
+          }}>⚡ Content generieren</button>
 
           {generated && (
             <div>
