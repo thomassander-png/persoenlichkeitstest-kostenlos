@@ -790,20 +790,18 @@ function ContentGenerator() {
       ctx.fillStyle = t.color;
       ctx.textAlign = 'center';
       fitText(ctx, t.emoji + ' ' + t.name.toUpperCase(), W/2, 280, maxW, 36);
-      // Hook — wrap with auto-shrink, split into 2 color blocks
-      const hookWords = g.hook.split(' ');
-      const midIdx = Math.ceil(hookWords.length / 2);
-      const line1 = hookWords.slice(0, midIdx).join(' ');
-      const line2 = hookWords.slice(midIdx).join(' ');
+      // Hook — vollständig mit wrapAutoShrink, kein manueller Split
+      // Erst Startgröße berechnen: bei kurzem Text groß, bei langem kleiner
+      const hookLen = g.hook.length;
+      const hookStartSize = hookLen < 20 ? 110 : hookLen < 35 ? 88 : hookLen < 50 ? 72 : 60;
       ctx.fillStyle = '#ffffff';
-      const s1 = fitText(ctx, line1, W/2, H/2 - 100, maxW, 96);
-      ctx.fillStyle = t.color;
-      ctx.font = `bold ${s1}px Arial`;
-      fitText(ctx, line2, W/2, H/2 + 40, maxW, s1);
-      // Subline
+      ctx.font = `bold ${hookStartSize}px Arial`;
+      const hookLines = wrapAutoShrink(ctx, g.hook, W/2, H/2 - 120, maxW, hookStartSize * 1.2, hookStartSize, 32);
+      // Subline — dynamisch nach Hook positioniert
+      const subY = H/2 - 120 + hookLines * hookStartSize * 1.2 + 60;
       ctx.font = '52px Arial';
       ctx.fillStyle = '#FFB800';
-      fitText(ctx, 'Die meisten wissen es nicht...', W/2, H/2 + 200, maxW, 52);
+      fitText(ctx, 'Die meisten wissen es nicht...', W/2, Math.max(subY, H/2 + 180), maxW, 52);
       // Bottom URL
       ctx.font = 'bold 38px Arial';
       ctx.fillStyle = 'rgba(255,255,255,0.4)';
