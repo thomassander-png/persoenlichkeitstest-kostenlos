@@ -355,6 +355,9 @@ function ContentGenerator() {
   const [optimizeInput, setOptimizeInput] = useState({hook:"",frage:"",antworten:["","","",""],ergebnis:"",cta:""});
   const [aggressivLevel, setAggressivLevel] = useState(7);
   const [activeVorlage, setActiveVorlage] = useState(null);
+  const [videoLoading, setVideoLoading] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
+  const [videoUrl, setVideoUrl] = useState(null);
   const [slideGenerated, setSlideGenerated] = useState(null);
   const [slideLoading, setSlideLoading] = useState(false);
   const [slideTest, setSlideTest] = useState(TESTS[0]);
@@ -687,6 +690,66 @@ function ContentGenerator() {
     });
   };
 
+  const generateVideo = async () => {
+    if (!slideGenerated || !slideGenerated.slides || slideGenerated.slides.length === 0) return;
+    setVideoLoading(true);
+    setVideoProgress(0);
+    setVideoUrl(null);
+    try {
+      const W = 1080, H = 1920;
+      const canvas = document.createElement("canvas");
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext("2d");
+      const stream = canvas.captureStream(30);
+      const chunks = [];
+      const recorder = new MediaRecorder(stream, {mimeType:"video/webm;codecs=vp9",videoBitsPerSecond:8000000});
+      recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+      recorder.onstop = () => {
+        const blob = new Blob(chunks, {type:"video/webm"});
+        const url = URL.createObjectURL(blob);
+        setVideoUrl(url);
+        setVideoLoading(false);
+        setVideoProgress(100);
+      };
+      recorder.start();
+      const SLIDE_DURATION = 3000; // 3s per slide
+      const FPS = 30;
+      const FRAMES_PER_SLIDE = (SLIDE_DURATION / 1000) * FPS;
+      const slides = slideGenerated.slides;
+      for (let si = 0; si < slides.length; si++) {
+        const img = new Image();
+        img.src = slides[si];
+        await new Promise(r => { img.onload = r; img.onerror = r; });
+        for (let f = 0; f < FRAMES_PER_SLIDE; f++) {
+          const progress = f / FRAMES_PER_SLIDE;
+          // Ken Burns zoom-in effect
+          const scale = 1 + progress * 0.06;
+          const offsetX = (W * (scale - 1)) / 2;
+          const offsetY = (H * (scale - 1)) / 2;
+          ctx.clearRect(0, 0, W, H);
+          ctx.save();
+          ctx.translate(-offsetX, -offsetY);
+          ctx.drawImage(img, 0, 0, W * scale, H * scale);
+          ctx.restore();
+          // Fade in first 15 frames, fade out last 15 frames
+          if (f < 15) {
+            ctx.fillStyle = `rgba(0,0,0,${1 - f/15})`;
+            ctx.fillRect(0, 0, W, H);
+          } else if (f > FRAMES_PER_SLIDE - 15) {
+            ctx.fillStyle = `rgba(0,0,0,${(f - (FRAMES_PER_SLIDE-15))/15})`;
+            ctx.fillRect(0, 0, W, H);
+          }
+          await new Promise(r => setTimeout(r, 1000/FPS));
+        }
+        setVideoProgress(Math.round(((si+1)/slides.length)*90));
+      }
+      recorder.stop();
+    } catch(e) {
+      console.error("Video error:", e);
+      setVideoLoading(false);
+    }
+  };
+
   const getScriptForTest = (testId) => {
     const scripts = SCRIPTS[testId];
     if (!scripts) return null;
@@ -886,6 +949,28 @@ function ContentGenerator() {
                 width:"100%",background:"linear-gradient(135deg,#00FF88,#00E5FF)",color:"#000",
                 border:"none",borderRadius:12,padding:"14px",fontSize:14,fontWeight:800,cursor:"pointer",marginTop:4
               }}>⬇️ Alle 4 Slides als PNG downloaden</button>
+
+              {/* Video generieren Button */}
+              <div style={{marginTop:12,background:"rgba(168,85,247,0.08)",borderRadius:12,padding:14,border:"1px solid rgba(168,85,247,0.3)"}}>
+                <div style={{fontSize:9,color:"#A855F7",letterSpacing:2,marginBottom:6}}>🎬 VIDEO EXPORT (BETA)</div>
+                <div style={{fontSize:10,color:"#7A84A8",marginBottom:10}}>4 Slides als WebM-Video mit Zoom-Effekt — direkt für TikTok</div>
+                <button onClick={generateVideo} disabled={videoLoading} style={{
+                  width:"100%",background:videoLoading?"rgba(22,28,53,0.7)":"linear-gradient(135deg,#A855F7,#FF0099)",
+                  color:"#fff",border:"none",borderRadius:10,padding:"12px",fontSize:13,fontWeight:700,
+                  cursor:videoLoading?"not-allowed":"pointer",opacity:videoLoading?0.7:1
+                }}>{videoLoading?`🎬 Rendering... ${videoProgress}%`:"🎬 Video generieren"}</button>
+                {videoUrl && (
+                  <div style={{marginTop:10}}>
+                    <video src={videoUrl} controls style={{width:"100%",borderRadius:10,marginBottom:8}} />
+                    <a href={videoUrl} download={`${slideGenerated.test.name}_video.webm`} style={{
+                      display:"block",width:"100%",boxSizing:"border-box",
+                      background:"linear-gradient(135deg,#00FF88,#00E5FF)",color:"#000",
+                      border:"none",borderRadius:10,padding:"12px",fontSize:13,fontWeight:800,
+                      cursor:"pointer",textAlign:"center",textDecoration:"none"
+                    }}>⬇️ Video downloaden (.webm)</a>
+                  </div>
+                )}
+              </div>
 
               {/* Caption für diese Slides */}
               <div style={{marginTop:16,background:"rgba(22,28,53,0.7)",borderRadius:12,padding:14,border:`1px solid ${slideGenerated.test.color}30`}}>
